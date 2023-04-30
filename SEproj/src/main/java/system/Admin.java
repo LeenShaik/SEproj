@@ -50,7 +50,6 @@ public class Admin {
 	public String search(String id, MySystem s1) {
 		
 		if(logState==false) {
-			JOptionPane.showInternalMessageDialog(null, "Admin login is required", "Error", JOptionPane.ERROR_MESSAGE);
 			return "Admin login is required";
 		}
 		else {
@@ -59,14 +58,12 @@ public class Admin {
 				return "coustomer information => id:"+s1.Customers.get(i).id + ", name:"+s1.Customers.get(i).name+", email:"+s1.Customers.get(i).email+" , number of requests:"+s1.Customers.get(i).numOfReq+" , phone number:"+s1.Customers.get(i).phone+" , address:"+s1.Customers.get(i).address;
 				}
 			}
-			JOptionPane.showInternalMessageDialog(null, "customer is not registered", "Error", JOptionPane.ERROR_MESSAGE);
 			return "customer is not registered";
 		}
 		}
 		public String searchProduct(String id, MySystem s1) {
 			String iD=id;
 			if(logState==false) {
-				JOptionPane.showInternalMessageDialog(null, "Admin login is required", "Error", JOptionPane.ERROR_MESSAGE);
 				return "Admin login is required";
 			}
 			else {
@@ -76,7 +73,6 @@ public class Admin {
 					}
 					}
 				}
-				JOptionPane.showInternalMessageDialog(null, "customer is not registered", "Error", JOptionPane.ERROR_MESSAGE);
 				return "product is not valid";
 			}
 		public void logOut() {

@@ -3,14 +3,19 @@ package system;
 import java.io.Console;
 import java.util.Scanner;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 public class main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws AddressException, MessagingException {
 		MySystem system =new MySystem();
+	
 		
-		Customer customer=new Customer("123456","faihaa odeh","faihaa.odeh20@gmail.com",5,"0599773638","DerAlhatab");
+
+		Customer customer=new Customer("123456","faihaa odeh","s11923877@stu.najah.edu",5,"0599773638","DerAlhatab");
 		system.Customers.add(customer);
-		customer=new Customer("113456","lana jaber","s11923877@stu.najah.edu",2,"0595721772","rafidia");
+		customer=new Customer("113456","lana jaber","faihaa.odeh20@gmail.com",2,"0595721772","rafidia");
 		system.Customers.add(customer);
 		customer=new Customer("987654","jana taher","s11819423@stu.najah.edu",1,"0593020265","makhfia");
 		system.Customers.add(customer);
@@ -168,7 +173,7 @@ public class main {
 	    	}
 	    	else if (choice.equals("3")) {
 	    		String oId,cId,pId,wId="123";
-	    		int numOfOrder,deliveryPrice=0,productPrice=15;
+	    		int numOfOrder;
 	    		oId=Integer.toString( system.Orders.size());
 	    		System.out.println("insert id of the customer who has this order");
 	    		cId=con.nextLine();
@@ -192,35 +197,46 @@ public class main {
 	    				wflag=k;
 	    				break;
 	    			}}
-	    		System.out.println("Does he want us to deliver the order? , just write Yes or No");
+	    		int indexc=0,indexp=0;
+	    		System.out.println("Does he want us to deliver the order? , just write Y for yes  or N for no");
 	    		String dflag=con.nextLine();
 	    		String email="s11923877@stu.najah.edu";
 	    		for(int i=0;i<system.Customers.size();i++) {
-	    			if(system.Customers.get(i).id==cId) {
-	    				system.Customers.get(i).numOfReq++;
+	    			if(system.Customers.get(i).id.equals(cId)) {
 	    				email=system.Customers.get(i).email;
-	    				if(dflag.equals("Yes")) {
-	    					deliveryPrice=system.diliveryPriceCalc(system.Customers.get(i));
-	    				}
-	    				else {
-	    					deliveryPrice=0;
-	    				}
+	    				indexc=i;
 	    				for(int j=0;j<system.Products.size();j++) {
-	    					if(system.Products.get(j).id==pId)
-	    						productPrice=system.productPriceCalc(system.Customers.get(i),system.Products.get(j), numOfOrder);
+	    					if(system.Products.get(j).id.equals(pId))
+	    						indexp=j;
+	    						
 	    						
 	    				}
 	    			}
 	    		}
+	    		int deliveryPrice=system.diliveryPriceCalc(system.Customers.get(indexc));
+	    		
+				int productPrice=system.productPriceCalc(system.Customers.get(indexc),system.Products.get(indexp), numOfOrder);
+				
+				if (dflag.equals("N")) {
+					deliveryPrice=0;
+				}
+				
+
 	    		Order o=new Order(oId,cId,pId,wId,numOfOrder,deliveryPrice,productPrice,Status.INTREATMENT);
-	    		System.out.println("Status for order now is in treatment,when worker finish insert complete ");
+	    		
+	    		int invoice=deliveryPrice+productPrice;
+    			System.out.println("His invoice is :"+invoice);
+	    		System.out.println("Status for order now is in treatment,when worker finish insert C for complete ");
 	    		while(true) {
 	    		String stat=con.nextLine();
-	    		if(stat.equals("complete")) {
+	    		if(stat.equals("C")) {
 	    			o.setStatus(Status.COMPLETE);
-	    			String done =system.sendEmail(email);
+	    			//system.sendGmail(email);
 	    			system.Orders.add(o);
+	    			system.Customers.get(indexc).numOfReq+=1;
 	    			system.Workers.get(wflag).setIsFree(true);
+	    			System.out.println("order complete ...");
+	    			
 	    			break;
 	    		}
 	    		else  {
@@ -269,6 +285,7 @@ public class main {
 	    		continue;
 	    	}
 	    	else if(choice.equals("6")) {
+	    		System.out.println("Logout successfully");
 	    		admin.logOut();
 	    		break;
 	    	}
