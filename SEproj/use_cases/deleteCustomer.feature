@@ -9,14 +9,12 @@ Background: The System has registered customers
   
 
 Scenario: customer deleted faild
-Given that the admin is logged in
-And he want to delete customer that his id "987987"
+Given admin want to delete customer that his id "987987"
 When admin tries to delete a customer 
 Then a msg "customer is not registered" should display
 
 Scenario: customer deleted success
-Given that the admin is logged in
-And he want to delete customer that his id "123456"
+Given admin want to delete customer that his id "123456"
 When admin tries to delete a customer
 Then a msg "customer deleted successfully" should display
 

@@ -35,8 +35,8 @@ public class Admin {
 			return false;
 			}
 		else {
-			if(username == "leen.aljaber123@gmail.com" && pass=="12345l") {
-				System.out.println("Welcom to the system ");
+			if(username.equals("leen.aljaber123@gmail.com") && pass.equals("12345l")) {
+				System.out.println("welcom leen, choose what you want to do");
 				logState=true;
 				return true;}
 			else {
@@ -90,31 +90,7 @@ public class Admin {
 			}
 			
 		}
-		public String sendEmail(String email) {
-			  String s="Sent message successfully...";
-		      String from = "leen.aljaber123@gmail.com";
-			  String to = email;
-		      String host = "localhost";
-		      Properties properties = System.getProperties();
-		      properties.setProperty("mail.smtp.host", host);
-		      Session session = Session.getDefaultInstance(properties);
-
-		      try {
-
-		         MimeMessage message = new MimeMessage(session);
-		         message.setFrom(new InternetAddress(from));
-		         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-		         message.setSubject("order complete!");
-
-		         message.setText("Your order is completed , thank you for dealing with us :)");
-		         Transport.send(message);
-		         
-		        
-		      } catch (MessagingException mex) {
-		         mex.printStackTrace();
-		      }
-			 return s;
-		   }
+		
 		public String distribute(MySystem ms ,Worker w, Order o) {
 			int index=-1;
 			for(int i=0;i<ms.Workers.size();i++) {

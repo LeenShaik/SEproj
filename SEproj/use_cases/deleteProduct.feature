@@ -11,14 +11,12 @@ Background: The System has these products
   |5|CURTAIN|8|
   
 Scenario: product deleted faild
-Given that the admin is logged in
-And he want to delete product that its id "7"
+Given that admin want to delete product that its id "7"
 When admin tries to delete a product
 Then a massage "product is not valid" should display
 
 Scenario: product deleted success
-Given that the admin is logged in
-And he want to delete product that its id "5"
+Given that admin want to delete product that its id "5"
 When admin tries to delete a product
 Then a massage "product deleted successfully" should display
 

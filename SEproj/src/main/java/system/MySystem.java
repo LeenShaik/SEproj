@@ -1,7 +1,14 @@
 package system;
 
 import java.util.ArrayList;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 
 
@@ -13,24 +20,28 @@ public class MySystem {
 	
 	public boolean Report() {
 		int i,c=0,d=0,w=0;
+		System.out.println("These customers are registered in the system");
+		System.out.printf("%-20s|%-20s|%-25s|%-20s|%-10s|%-20s|%n","Id","Name","email","Number of request","Phone","address");
 		for ( i=0;i<Customers.size();i++) {
-			System.out.println("These customers are registered in the system");
-            System.out.printf("%-20s|%-20s|%-25s|%-20s|%-10s|%-20s|%n","Id","Name","email","Number of request","Phone","address");
+            
             System.out.printf("%-20s|%-20s|%-25s|%-20d|%-10s|%-20s|%n",Customers.get(i).id,Customers.get(i).name,Customers.get(i).email,Customers.get(i).numOfReq,Customers.get(i).phone,Customers.get(i).address);
             c=1;
 		}
 		i=0;
-		System.out.println("__________________________________________________________________________________________________");
+		System.out.println("_____________________________________________________________________________________________________________"+"\n");
+		System.out.println("These products are valid in the system");
+		System.out.printf("%-10s|%-42s|%-10s|%n","Id","Name","price");
 		for (i=0;i<Products.size();i++) {
-       		System.out.println("These products are valid in the system");
-            System.out.printf("%-10s|%-42s|%-10s|%n","Id","Name","price");
+            
             System.out.printf("%-10s|%-42s|%-10d|%n",Products.get(i).id,Products.get(i).name,Products.get(i).price);	
 			d=1;
 		}
 		i=0;
+		System.out.println("_____________________________________________________________________________________________________________"+"\n");
+		System.out.println("These workers works in the system");
+		System.out.printf("%-10s|%-20s|%-11s|%-15s|%n","Id","Name","Phone","address");
 		for(i=0;i<Workers.size();i++) {
-			 System.out.println("These workers works in the system");
-             System.out.printf("%-10s|%-20s|%-11s|%-15s|%n","Id","Name","Phone","address");
+             
              System.out.printf("%-10s|%-20s|%-11s|%-15s|%n",Workers.get(i).id,Workers.get(i).name,Workers.get(i).phone,Workers.get(i).address);
 			 w=1;
 		}
@@ -63,12 +74,10 @@ public class MySystem {
 	public String register(Customer c) {
 			for(int i=0;i<Customers.size();i++) {
 				if(c.id.equals(Customers.get(i).id)) {
-					JOptionPane.showInternalMessageDialog(null, "customer is alreay registered", "Error", JOptionPane.ERROR_MESSAGE);
 					return "customer is alreay registered";
 				}
 			}
 			Customers.add(c);
-			JOptionPane.showInternalMessageDialog(null, "customer registered succefully", "success", JOptionPane.INFORMATION_MESSAGE);
 			return "customer registered succefully";
 		
 	}
@@ -78,21 +87,19 @@ public class MySystem {
 		String id=iD;
 			for(int i=0;i<Customers.size();i++) {
 				if(id.equals(Customers.get(i).id)) {
-					if(whatUpdate == "address") 
+					if(whatUpdate.equals("address")) 
 						Customers.get(i).setAddress(newValue);
-					else if(whatUpdate=="name")
+					else if(whatUpdate.equals("name"))
 						Customers.get(i).setName(newValue);
-					else if (whatUpdate=="username")
+					else if (whatUpdate.equals("username"))
 						Customers.get(i).setUserName(newValue);
-					else if(whatUpdate=="phone")
+					else if(whatUpdate.equals("phone"))
 						Customers.get(i).setPhone(newValue);
-					else if(whatUpdate=="numOfReq")
+					else if(whatUpdate.equals("numOfReq"))
 						Customers.get(i).setNumOfReq(Integer.parseInt(newValue));
-					JOptionPane.showInternalMessageDialog(null, "customer registered succefully", "success", JOptionPane.INFORMATION_MESSAGE);
 					return "customer updated successfully";
 				}
 			}
-			JOptionPane.showInternalMessageDialog(null, "customer is not registered", "Error", JOptionPane.ERROR_MESSAGE);
 			return "customer is not registered";
 		
 		
@@ -100,13 +107,12 @@ public class MySystem {
 	public String addProduct(Product p) {
 			
 				for(int i=0;i<Products.size();i++) {
-					if(p.id==Products.get(i).id) {
-						JOptionPane.showInternalMessageDialog(null, "product is already valid", "Error", JOptionPane.ERROR_MESSAGE);
+					if(p.id.equals(Products.get(i).id)) {
 						return "product is already valid";
 					}
 				}
+				
 				Products.add(p);
-				JOptionPane.showInternalMessageDialog(null, "customer registered succefully", "success", JOptionPane.INFORMATION_MESSAGE);
 				return "product added succefully";
 			
 		
@@ -114,84 +120,93 @@ public class MySystem {
 	public String deleteCustomer(String iD) {
 		int index=-1;
 			for(int i=0;i<Customers.size();i++) {
-				if(!(iD.equals(Customers.get(i).id))) {
-					JOptionPane.showInternalMessageDialog(null, "customer is not registered", "Error", JOptionPane.ERROR_MESSAGE);
-					return "customer is not registered";
+				if(iD.equals(Customers.get(i).id)) {
+					index=1;
+					
 				}
-				else {
-					index=i;
-				    break;}
+				
 			}
 			
+			if(index==-1) {
+				return "customer is not registered";
+			}
+			else {
 			Customers.remove(index);
-			JOptionPane.showInternalMessageDialog(null, "customer deleted successfully", "success", JOptionPane.INFORMATION_MESSAGE);
-			return "customer deleted successfully";
+			return "customer deleted successfully";}
 		
 	}
 	public String deleteProduct(String iD) {
 		int index=-1;
 		
 			for(int i=0;i<Products.size();i++) {
-				if(!(iD==Products.get(i).id)) {
-					JOptionPane.showInternalMessageDialog(null, "product is not valid", "Error", JOptionPane.ERROR_MESSAGE);
-					return "product is not valid";
+				if(iD.equals(Products.get(i).id)) {
+					index=i;
 				}
-				else {
-					 index=i;
-					 break;}
+				
 			}
+			if(index==-1) {
+				return "product is not valid";
+			}
+			else {
 			Products.remove(index);
-			JOptionPane.showInternalMessageDialog(null, "product deleted successfully", "success", JOptionPane.INFORMATION_MESSAGE);
-			return "product deleted successfully";
+			return "product deleted successfully";}
 		
 	}
 	public String updateProduct(String w, String iD, String n) {
 		String id=iD;
 		String whatUpdate=w;
 		String newValue=n;
-		
+		int flag=0;
 		
 			for(int i=0;i<Products.size();i++) {
 				if(id.equals(Products.get(i).id)) {
-					if(whatUpdate == "name") 
+					if(whatUpdate .equals("name")) {
 						Products.get(i).setName(newValue);
-					else if(whatUpdate=="price")
+						flag=1;
+					}
+					else if(whatUpdate.equals("price")) {
 						Products.get(i).setPrice(Integer.valueOf(newValue));
-					JOptionPane.showInternalMessageDialog(null, "product updated successfully", "success", JOptionPane.INFORMATION_MESSAGE);
-					return "product updated successfully";
+						flag=1;
+					}
+					
 				}
 			}
-			JOptionPane.showInternalMessageDialog(null, "product is not valid", "Error", JOptionPane.ERROR_MESSAGE);
-			return "product is not valid";
+			if(flag==1)
+				return "product updated successfully";
+			else 
+				return "product is not valid";
 		
 	}
 	public void list() {
-	    System.out.print("1- Register,Delete,Search,Update Customer "+"\n");
-	    System.out.print("2- Register,Delete,Search,Update Product "+"\n");
+	    System.out.print("1- Add,Delete,Search,Update Customer "+"\n");
+	    System.out.print("2- Add,Delete,Search,Update Product "+"\n");
 	    System.out.print("3- add new order "+"\n");
 	    System.out.print("4- Report for the system "+"\n");
 	    System.out.print("5- Print total cash,paid,delivered items "+"\n");
+	    System.out.print("6- Logout "+"\n");
 
 }
 	public boolean CustomerValid(String id) {
 		int flag=0;
 		for(int i=0;i<Customers.size();i++) {
-			if(Customers.get(i).id==id)
+			if(Customers.get(i).id.equals(id))
 				flag =1;
 		}
 		if(flag==1)
 			return true;
-		return false;
+		else 
+			return false;
 	}
 	public boolean ProductValid(String id) {
 		int flag=0;
 		for(int i=0;i<Products.size();i++) {
-			if(Products.get(i).id==id)
+			if(Products.get(i).id.equals(id))
 				flag =1;
 		}
 		if(flag==1)
 			return true;
-		return false;
+		else 
+			return false;
 	}
 	public void productList() {
 		System.out.println("0-if he want to clean CARPET minimum than 9");
@@ -202,20 +217,63 @@ public class MySystem {
 		System.out.println("5-if he want to clean CURTAIN");
 
 	}
+	public String distribute( Order o) {
+		int index=-1;
+		for(int i=0;i<Workers.size();i++) {
+			if(Workers.get(i).getIsFree()) {
+				index=i;
+				o.wId=Workers.get(i).id;
+				Workers.get(i).setIsFree(false);
+				o.setStatus(Status.INTREATMENT);
+				break;
+			}
+		}
+		if(index==-1) {
+			return "all worker is not available";
+		}
+		else 
+			return "worker"+Workers.get(index).id+"received the order";
+		
+	}
+	public String sendEmail(String email) {
+		  String s="Sent message successfully...";
+	      String from = "leen.aljaber123@gmail.com";
+		  String to = email;
+	      String host = "localhost";
+	      Properties properties = System.getProperties();
+	      properties.setProperty("mail.smtp.host", host);
+	      Session session = Session.getDefaultInstance(properties);
+
+	      try {
+
+	         MimeMessage message = new MimeMessage(session);
+	         message.setFrom(new InternetAddress(from));
+	         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+	         message.setSubject("order complete!");
+
+	         message.setText("Your order is completed , thank you for dealing with us :)");
+	         Transport.send(message);
+	         
+	        
+	      } catch (MessagingException mex) {
+	         mex.printStackTrace();
+	      }
+		 return s;
+	   }
 	public int diliveryPriceCalc(Customer c ) {
 		String s=c.address;
 		int deliveryPrice=12;
-		if(s.toUpperCase().trim()=="DERALHATAB")
+		if(s.toUpperCase().trim().equals("DERALHATAB"))
 			deliveryPrice=20;
-		else if(s.toUpperCase().trim()=="TELSTREET")
+		else if(s.toUpperCase().trim().equals("TELSTREET"))
 			deliveryPrice=15;
-		else if(s.toUpperCase().trim()=="MREGSTREET")
+		else if(s.toUpperCase().trim().equals("MREGSTREET"))
 			deliveryPrice=15;
-		else if(s.toUpperCase().trim()=="STREER15")
+		else if(s.toUpperCase().trim().equals("STREER15"))
 			deliveryPrice=14;
-		else if(s.toUpperCase().trim()=="ASERA")
+		else if(s.toUpperCase().trim().equals("ASERA"))
 			deliveryPrice=18;
-		else if(s.toUpperCase().trim()=="DERSHARAF")
+		else if(s.toUpperCase().trim().equals("DERSHARAF"))
 			deliveryPrice=18;
 		else deliveryPrice=12;
 		return deliveryPrice;

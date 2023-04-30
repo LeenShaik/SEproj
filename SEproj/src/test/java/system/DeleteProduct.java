@@ -11,6 +11,7 @@ public class DeleteProduct {
 	public MySystem ms;
 	public Product p;
 	String s,id;
+	int after,before;
 	
 	public DeleteProduct(Admin a,MySystem ms ,Product p) {
 		this.a=a;
@@ -31,28 +32,28 @@ public void that_these_products_are_valid_in_the_system(io.cucumber.datatable.Da
 		p=new Product(id,name,price);
 		ms.Products.add(p);   
 		}
+	before=ms.Products.size();
     throw new io.cucumber.java.PendingException();
 }
 
-@Given("that the admin is logged in")
-public void that_the_admin_is_logged_in() {
-	a.setLoginState(true);
-}
 
-@Given("he want to delete product that its id {string}")
-public void he_want_to_delete_product_that_its_id(String string) {
+
+@Given("that admin want to delete product that its id {string}")
+public void that_admin_want_to_delete_product_that_its_id(String string) {
     id=string;
 }
 
 @When("admin tries to delete a product")
 public void admin_tries_to_delete_a_product() {
 	s=ms.deleteProduct(id);
+	after=ms.Products.size();
 
 }
 
 @Then("a massage {string} should display")
 public void a_massage_should_display(String string) {
 	assertEquals(string,s);
+	assertEquals(after,before-1);
 	
 }
 

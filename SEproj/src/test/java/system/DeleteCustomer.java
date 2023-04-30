@@ -33,14 +33,11 @@ public void that_these_customers_are_registered_in_the_system(io.cucumber.datata
 		}
     throw new io.cucumber.java.PendingException();
 }
-@Given("that the admin is logged in")
-public void that_the_admin_is_logged_in() {
-	  a.setLoginState(true);
-}
 
 
-@Given("he want to delete customer that his id {string}")
-public void he_want_to_delete_customer_that_his_id1(String string) {
+
+@Given("admin want to delete customer that his id {string}")
+public void admin_want_to_delete_customer_that_his_id1(String string) {
     id=string;
 }
 

@@ -1,6 +1,7 @@
 package system;
 
 import java.io.Console;
+import java.util.Scanner;
 
 public class main {
 
@@ -52,143 +53,158 @@ public class main {
 		system.Orders.add(order);
 		
 		Admin admin =new Admin ();
-		String username,pass;char [] password;
-	    Console console = System.console();
+		String username,password;
+		Scanner con = new Scanner(System.in);
 	    System.out.println("Enter username:");
-	    username = console.readLine();
+	    username = con.nextLine();
 	    System.out.println("Enter password:");
-	    password = console.readPassword();
-	    pass=new String(password);
-	    if(admin.login(username, pass)) {
-	    	System.out.println("welcom leen, choose what you want to do");
+	    password = con.nextLine();
+	    
+	    if(admin.login(username, password)) {
 	    	system.list();
-	    	String choice=console.readLine();
-	    	char ch;
-	    	if(choice =="1")
-	    		ch='1';
-	    	else if(choice == "2")
-	    		ch='2';
-	    	else if(choice == "3")
-	    		ch='3';
-	    	else if(choice == "4")
-	    		ch='4';
-	    	else if(choice == "5")
-	    		ch='5';
-	    	else {
-	    		System.out.println("plz insert valid choice !! ");
-	    		choice=console.readLine();
-	    	}
+	    	while(true) {
+	    	String choice=con.nextLine();
 	    	
-	    		
-	    		
-	    	
-	    	switch(ch) {
-	    	case '1':
+	    	if(choice.equals("1")) {
 	    		System.out.println("Enter A for add , D for delete and U for update customer");
 	    		System.out.println("You can enter B to back to the list !");
-	    		String s =console.readLine();
-	    		if(s=="A") {
+	    		while(true) {
+	    		String s =con.nextLine();
+	    		if(s.equals("A")) {
 	    			String  id,name,email,phone,address;
-		    		int numOfReq=0;
+	    			int numOfReq=0;
 	    			System.out.println("insert his id");
-	    			id=console.readLine();
+	    			id=con.nextLine();
 	    			System.out.println("insert his name");
-	    			name=console.readLine();
+	    			name=con.nextLine();
 	    			System.out.println("insert his email");
-	    			email=console.readLine();
+	    			email=con.nextLine();
 	    			System.out.println("insert his phone");
-	    			phone=console.readLine();
+	    			phone=con.nextLine();
 	    			System.out.println("insert his address");
-	    			address=console.readLine();
+	    			address=con.nextLine();
 	    			Customer c=new Customer(id,name,email,numOfReq,phone,address);
-	    			system.Customers.add(c);
-	    		}
-	    		else if(s=="D") {
+	    			String pr = system.register(c);
+	    			System.out.println(pr);
+	    			continue;
+	    					}
+	    		else if(s.equals("D")) {
 	    			System.out.println("insert the id for customer to delete him");
-	    			String id=console.readLine();
-	    			system.deleteCustomer(id);
-	    		}
-	    		else if(s=="U") {
+	    			String id=con.nextLine();
+	    			String pr=system.deleteCustomer(id);
+	    			System.out.println(pr);
+	    			continue;
+	    						}
+	    		else if(s.equals("U")) {
 	    			System.out.println("insert what you want to update ");
-	    			String whatUpdate=console.readLine();
+	    			String whatUpdate=con.nextLine();
 	    			System.out.println("insert the id for customer ");
-	    			String id=console.readLine();
+	    			String id=con.nextLine();
 	    			System.out.println("insert the new value");
-	    			String newValue=console.readLine();
-	    			system.update(whatUpdate, id, newValue);
-	    			
-	    		}
-	    		else if (s=="B") {
+	    			String newValue=con.nextLine();
+	    			String pr=system.update(whatUpdate, id, newValue);
+	    			System.out.println(pr);
+	    			continue;
+    			
+	    						}
+	    		else if (s.equals("B")) {
 	    			system.list();
-	    			choice=console.readLine();
-	    		}
+	    			break;
+	    						}
 	    		else {
 	    			System.out.println("plz enter valid value!");
-	    			s=console.readLine();
+	    			continue;
+	    			 }
 	    		}
-	    		break;
-	    	case '2':
+	    		continue;
+	    		}
+	    	else if(choice.equals("2")) {
 	    		System.out.println("Enter A for add , D for delete and U for update product");
 	    		System.out.println("You can enter B to back to the list !");
-	    		String s1 =console.readLine();
-	    		if(s1=="A") {
+	    		while(true) {
+	    		String s1 =con.nextLine();
+	    		if(s1.equals("A")) {
 	    			String id,name;
 	    			int price;
 	    			System.out.println("insert its id");
-	    			id=console.readLine();
+	    			id=con.nextLine();
 	    			System.out.println("insert its name");
-	    			name=console.readLine();
+	    			name=con.nextLine();
 	    			System.out.println("insert its price");
-	    			price=Integer.parseInt(console.readLine());
+	    			price=Integer.parseInt(con.nextLine());
 	    			Product p=new Product(id,name,price);
-	    			system.Products.add(p);
+	    			String pr =system.addProduct(p);
+	    			System.out.println(pr);
+	    			continue;
 	    		}
-	    		else if(s1=="D") {
+	    		else if(s1.equals("D")) {
 	    			System.out.println("insert the id for product to delete it");
-	    			String id=console.readLine();
-	    			system.deleteProduct(id);
+	    			String id=con.nextLine();
+	    			String pr =system.deleteProduct(id);
+	    			System.out.println(pr);
+	    			continue;
 	    		}
-	    		else if(s1=="U") {
+	    		else if(s1.equals("U")) {
 	    			System.out.println("insert what you want to update");
-	    			String whatUpdate=console.readLine();
+	    			String whatUpdate=con.nextLine();
 	    			System.out.println("insert the id for product");
-	    			String id=console.readLine();
+	    			String id=con.nextLine();
 	    			System.out.println("insert the new value");
-	    			String newValue=console.readLine();
-	    			system.updateProduct(newValue, id, username);
+	    			String newValue=con.nextLine();
+	    			String pr =system.updateProduct(newValue, id, username);
+	    			System.out.println(pr);
+	    			continue;
 	    			
 	    		}
-	    		else if (s1=="B") {
+	    		else if (s1.equals("B")) {
 	    			system.list();
-	    			choice=console.readLine();
+	    			break;
 	    		}
 	    		else {
 	    			System.out.println("plz enter valid value!");
-	    			s1=console.readLine();
-	    		}
-	    		break;
-	    	case '3':
-	    		String oId,cId,pId,wId;
-	    		int numOfOrder,deliveryPrice,productPrice;
-	    		Status status=Status.WAITING;
-	    		oId=Integer.toString( system.Orders.size() +1);
+	    			continue;
+	    		}}
+	    		continue;
+	    	}
+	    	else if (choice.equals("3")) {
+	    		String oId,cId,pId,wId="123";
+	    		int numOfOrder,deliveryPrice=0,productPrice=15;
+	    		oId=Integer.toString( system.Orders.size());
 	    		System.out.println("insert id of the customer who has this order");
-	    		cId=console.readLine();
+	    		cId=con.nextLine();
 	    		if(! (system.CustomerValid(cId))) {
-	    			System.out.println("this id is not exist! plz enter exist id!");
-	    			cId=console.readLine();
+	    			System.out.println("this customer is not exist! plz enter exist id!");
+	    			cId=con.nextLine();
 	    		}
 	    		System.out.println("insert what's the  product he want to clean");
 	    		system.productList();
-	    		pId=console.readLine();
+	    		pId=con.nextLine();
 	    		if(!(system.ProductValid(pId))) {
-	    			System.out.println("this id is not exist! plz enter exist id!");
-    			    pId=console.readLine();}
+	    			System.out.println("this product is not exist! plz enter exist id!");
+    			    pId=con.nextLine();}
 	    		System.out.println("insert number of products he want");
-	    		numOfOrder=Integer.valueOf(console.readLine());
+	    		numOfOrder=Integer.valueOf(con.nextLine());
+	    		int wflag=0;
+	    		for(int k=0;k<system.Workers.size();k++) {
+	    			if(system.Workers.get(k).isFree==true) {
+	    				wId=system.Workers.get(k).id;
+	    				system.Workers.get(k).setIsFree(false);
+	    				wflag=k;
+	    				break;
+	    			}}
+	    		System.out.println("Does he want us to deliver the order? , just write Yes or No");
+	    		String dflag=con.nextLine();
+	    		String email="s11923877@stu.najah.edu";
 	    		for(int i=0;i<system.Customers.size();i++) {
 	    			if(system.Customers.get(i).id==cId) {
-	    				deliveryPrice=system.diliveryPriceCalc(system.Customers.get(i));
+	    				system.Customers.get(i).numOfReq++;
+	    				email=system.Customers.get(i).email;
+	    				if(dflag.equals("Yes")) {
+	    					deliveryPrice=system.diliveryPriceCalc(system.Customers.get(i));
+	    				}
+	    				else {
+	    					deliveryPrice=0;
+	    				}
 	    				for(int j=0;j<system.Products.size();j++) {
 	    					if(system.Products.get(j).id==pId)
 	    						productPrice=system.productPriceCalc(system.Customers.get(i),system.Products.get(j), numOfOrder);
@@ -196,10 +212,73 @@ public class main {
 	    				}
 	    			}
 	    		}
-	    			//////1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	    		Order o=new Order(oId,cId,pId,wId,numOfOrder,deliveryPrice,productPrice,Status.INTREATMENT);
+	    		System.out.println("Status for order now is in treatment,when worker finish insert complete ");
+	    		while(true) {
+	    		String stat=con.nextLine();
+	    		if(stat.equals("complete")) {
+	    			o.setStatus(Status.COMPLETE);
+	    			String done =system.sendEmail(email);
+	    			system.Orders.add(o);
+	    			system.Workers.get(wflag).setIsFree(true);
+	    			break;
+	    		}
+	    		else  {
+	    			System.out.println("Insert valid status !");
+	    			continue;
+	    		}
+	    		}
 	    		
-	    		
+	    		continue;
 	    	}
+	    	else if(choice.equals("4")) {
+	    		system.Report();
+	    		continue;
+	    	}
+	    	else if(choice.equals("5")) {
+	    		System.out.println("Insert C fot total cash ,P for total paid and Dfor delivered items") ; 
+	    		System.out.println("You can enter B to back to the list !");
+	    		while(true) {
+	    			String s2=con.nextLine();
+	    			if(s2.equals("C")) {
+	    				int c = system.totalCash();
+	    				System.out.println("Total cash = "+c);
+	    				continue;
+	    			}
+	    			else if(s2.equals("P")) {
+	    				int p = system.totalPaid();
+	    				System.out.println("Total paid = "+ p);
+	    				continue;
+	    			}
+	    			else if(s2.equals("D")){
+	    				int d = system.totaldelivery();
+	    				System.out.println("Total delivered item = "+d);
+	    				continue;
+	    			}
+	    			else if(s2.equals("B")) {
+	    				system.list();
+	    				break;
+	    			}
+	    			else {
+		    			System.out.println("plz enter valid value!");
+		    			continue;
+		    		}
+	    					
+	    		}
+	    		
+	    		continue;
+	    	}
+	    	else if(choice.equals("6")) {
+	    		admin.logOut();
+	    		break;
+	    	}
+	    	else {
+	    		System.out.println("plz insert valid choice !! ");
+	    		continue;
+	    	}
+	    	}
+	   
+	    	
 	    }
 		
 		
