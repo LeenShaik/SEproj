@@ -1,11 +1,13 @@
 package system;
 
-import java.util.ArrayList;
-
 public class Customer {
 
-	String id,name,email,phone,address;
-    public int numOfReq;
+	String id;
+	String name;
+	String email;
+	String phone;
+	String address;
+    int numOfReq;
 	public Customer(String id,String name,String email,int numOfReq,String phone,String address) {
 		this.id=id;
 		this.email=email;

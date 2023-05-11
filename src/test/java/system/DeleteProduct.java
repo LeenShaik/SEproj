@@ -30,9 +30,9 @@ public void that_these_products_are_valid_in_the_system(io.cucumber.datatable.Da
 		name=dataTable.cell(i,1);
 		price=Integer.parseInt(dataTable.cell(i,2));
 		p=new Product(id,name,price);
-		ms.Products.add(p);   
+		ms.products.add(p);   
 		}
-	before=ms.Products.size();
+	before=ms.products.size();
     throw new io.cucumber.java.PendingException();
 }
 
@@ -46,7 +46,7 @@ public void that_admin_want_to_delete_product_that_its_id(String string) {
 @When("admin tries to delete a product")
 public void admin_tries_to_delete_a_product() {
 	s=ms.deleteProduct(id);
-	after=ms.Products.size();
+	after=ms.products.size();
 
 }
 

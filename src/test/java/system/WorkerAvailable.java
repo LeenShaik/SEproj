@@ -30,7 +30,7 @@ public class WorkerAvailable {
 			isFree=Boolean.valueOf(dataTable.cell(i,4));
 			
 			w=new Worker(id,name,phone,address,isFree);
-			ms.Workers.add(w);   
+			ms.workers.add(w);   
 			}
 	    throw new io.cucumber.java.PendingException();
 	}

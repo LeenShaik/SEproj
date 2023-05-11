@@ -1,13 +1,14 @@
 package system;
 
 public class Product {
-	String id,name;
+	String id;
+	String name;
 	int price;
 	
 	public Product(String id, String name, int price2) {
 		this.id=id;
 		this.name=name;
-		this.price=price2;// TODO Auto-generated constructor stub
+		this.price=price2;
 	}
 	
 	public void setName(String newValue) {

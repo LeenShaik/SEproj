@@ -34,8 +34,10 @@ public class Total {
 			price=Integer.parseInt(dataTable.cell(i,6));
 			status=Status.valueOf(dataTable.cell(i, 7));
 
-			o=new Order(oid,cid,pid,wid,n,delivery,price,status);
-			ms.Orders.add(o);   
+			o=new Order(oid,cid,pid,wid,n,delivery,price);
+			o.setStatus(status);
+
+			ms.orders.add(o);   
 			}
 	    throw new io.cucumber.java.PendingException();
 	}

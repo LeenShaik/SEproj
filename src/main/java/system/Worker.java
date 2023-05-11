@@ -1,7 +1,10 @@
 package system;
 
 public class Worker {
-String id,name,phone,address;
+String id;
+String name;
+String phone;
+String address;
 boolean isFree;
 
 public Worker(String id , String name ,String phone ,String address ,boolean isFree) {

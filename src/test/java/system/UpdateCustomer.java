@@ -29,7 +29,7 @@ public void that_these_customers_are_registered_in_the_system(io.cucumber.datata
 		phone=dataTable.cell(i,4);
 		address=dataTable.cell(i,5);
 		c=new Customer(id,name,email,numOfReq,phone,address);
-		ms.Customers.add(c);   
+		ms.customers.add(c);   
 		}
     throw new io.cucumber.java.PendingException();
 }

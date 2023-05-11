@@ -32,7 +32,7 @@ public void that_these_products_are_valid_in_the_system(io.cucumber.datatable.Da
 		name=dataTable.cell(i,1);
 		price=Integer.parseInt(dataTable.cell(i,2));
 		p=new Product(id,name,price);
-		ms.Products.add(p);   
+		ms.products.add(p);   
 		}
     throw new io.cucumber.java.PendingException();
 }

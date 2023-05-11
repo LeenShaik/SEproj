@@ -29,7 +29,7 @@ public class Report {
 			phone=dataTable.cell(i,4);
 			address=dataTable.cell(i,5);
 			c=new Customer(id,name,email,numOfReq,phone,address);
-			system.Customers.add(c);   
+			system.customers.add(c);   
 			}
 	    throw new io.cucumber.java.PendingException();
 	}
@@ -43,7 +43,7 @@ public class Report {
 			name=dataTable.cell(i,1);
 			price=Integer.parseInt(dataTable.cell(i,2));
 			p=new Product(id,name,price);
-			system.Products.add(p);   
+			system.products.add(p);   
 			}
 	    throw new io.cucumber.java.PendingException();
 	}
@@ -60,14 +60,14 @@ public class Report {
 			isFree=Boolean.valueOf(dataTable.cell(i,4));
 			
 			w=new Worker(id,name,phone,address,isFree);
-			system.Workers.add(w);   
+			system.workers.add(w);   
 			}
 	    throw new io.cucumber.java.PendingException();
 	}
 
 	@When("admin tries to show the report")
 	public void admin_tries_to_show_the_report() {
-	    b= system.Report();
+	    b= system.report();
 	}
 
 	@Then("report will display")
