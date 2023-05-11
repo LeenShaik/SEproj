@@ -3,27 +3,30 @@ package system;
 
 import java.util.Scanner;
 
+import java.util.logging.Logger;
+
 public class MyMain {
-	final String id1="123456";
-	final String id2="113456";
-	final static String back="You can enter B to back to the list !";
-	
+	static final String ID1="123456";
+	static final String ID2="113456";
+	static final String BACK="You can enter B to back to the list !";
+    private static final Logger LOGGER = Logger.getLogger(MyMain.class.getName());
+
 	public static void list() {
-	    System.out.print("1- Add,Delete,Search,Update Customer "+"\n");
-	    System.out.print("2- Add,Delete,Search,Update Product "+"\n");
-	    System.out.print("3- add new order "+"\n");
-	    System.out.print("4- Report for the system "+"\n");
-	    System.out.print("5- Print total cash,paid,delivered items "+"\n");
-	    System.out.print("6- Logout "+"\n");
+		LOGGER.info("1- Add,Delete,Search,Update Customer "+"\n");
+		LOGGER.info("2- Add,Delete,Search,Update Product "+"\n");
+		LOGGER.info("3- add new order "+"\n");
+		LOGGER.info("4- Report for the system "+"\n");
+		LOGGER.info("5- Print total cash,paid,delivered items "+"\n");
+		LOGGER.info("6- Logout "+"\n");
 
 }
 	public static void productList() {
-		System.out.println("0-if he want to clean CARPET minimum than 9");
-		System.out.println("1-if he want to clean CARPET greater than 9 and smaller than 16");
-		System.out.println("2-if he want to clean CARPET greater than 16");
-		System.out.println("3-if he want to clean SINGLE COVER");
-		System.out.println("4-if he want to clean COUPLE COVER");
-		System.out.println("5-if he want to clean CURTAIN");
+		LOGGER.info("0-if he want to clean CARPET minimum than 9");
+		LOGGER.info("1-if he want to clean CARPET greater than 9 and smaller than 16");
+		LOGGER.info("2-if he want to clean CARPET greater than 16");
+		LOGGER.info("3-if he want to clean SINGLE COVER");
+		LOGGER.info("4-if he want to clean COUPLE COVER");
+		LOGGER.info("5-if he want to clean CURTAIN");
 
 	}
 	
@@ -88,9 +91,9 @@ public class MyMain {
 		String username;
 		String password;
 		Scanner con = new Scanner(System.in);
-	    System.out.println("Enter username:");
+		LOGGER.info("Enter username:");
 	    username = con.nextLine();
-	    System.out.println("Enter password:");
+	    LOGGER.info("Enter password:");
 	    password = con.nextLine();
 	    
 	    if(admin.login(username, password)) {
@@ -100,8 +103,8 @@ public class MyMain {
 	    	String choice=con.nextLine();
 	    	
 	    	if(choice.equals("1")) {
-	    		System.out.println("Enter A for add , D for delete and U for update customer");	    		
-	    		System.out.println(back);
+	    		LOGGER.info("Enter A for add , D for delete and U for update customer");	    		
+	    		LOGGER.info(BACK);
 	    		
 	    		while(true) {
 	    		String s =con.nextLine();
@@ -112,15 +115,15 @@ public class MyMain {
 	    			String phone;
 	    			String address;
 	    			int numOfReq=0;
-	    			System.out.println("insert his id");
+	    			LOGGER.info("insert his id");
 	    			id=con.nextLine();
-	    			System.out.println("insert his name");
+	    			LOGGER.info("insert his name");
 	    			name=con.nextLine();
-	    			System.out.println("insert his email");
+	    			LOGGER.info("insert his email");
 	    			email=con.nextLine();
-	    			System.out.println("insert his phone");
+	    			LOGGER.info("insert his phone");
 	    			phone=con.nextLine();
-	    			System.out.println("insert his address");
+	    			LOGGER.info("insert his address");
 	    			address=con.nextLine();
 	    			Customer c=new Customer(id,name,email,numOfReq,phone,address);
 	    			String pr = system.register(c);
@@ -128,21 +131,21 @@ public class MyMain {
 	    			continue;
 	    					}
 	    		else if(s.equals("D")) {
-	    			System.out.println("insert the id for customer to delete him");
+	    			LOGGER.info("insert the id for customer to delete him");
 	    			String id=con.nextLine();
 	    			String pr=system.deleteCustomer(id);
-	    			System.out.println(pr);
+	    			LOGGER.info(pr);
 	    			continue;
 	    						}
 	    		else if(s.equals("U")) {
-	    			System.out.println("insert what you want to update ");
+	    			LOGGER.info("insert what you want to update ");
 	    			String whatUpdate=con.nextLine();
-	    			System.out.println("insert the id for customer ");
+	    			LOGGER.info("insert the id for customer ");
 	    			String id=con.nextLine();
-	    			System.out.println("insert the new value");
+	    			LOGGER.info("insert the new value");
 	    			String newValue=con.nextLine();
 	    			String pr=system.update(whatUpdate, id, newValue);
-	    			System.out.println(pr);
+	    			LOGGER.info(pr);
 	    			continue;
     			
 	    						}
@@ -151,48 +154,48 @@ public class MyMain {
 	    			break;
 	    						}
 	    		else {
-	    			System.out.println("plz enter valid value!");
+	    			LOGGER.info("plz enter valid value!");
 	    			continue;
 	    			 }
 	    		}
 	    		continue;
 	    		}
 	    	else if(choice.equals("2")) {
-	    		System.out.println("Enter A for add , D for delete and U for update product");
-	    		System.out.println(back);
+	    		LOGGER.info("Enter A for add , D for delete and U for update product");
+	    		LOGGER.info(BACK);
 	    		while(true) {
 	    		String s1 =con.nextLine();
 	    		if(s1.equals("A")) {
 	    			String id;
 	    			String name;
 	    			int price;
-	    			System.out.println("insert its id");
+	    			LOGGER.info("insert its id");
 	    			id=con.nextLine();
-	    			System.out.println("insert its name");
+	    			LOGGER.info("insert its name");
 	    			name=con.nextLine();
-	    			System.out.println("insert its price");
+	    			LOGGER.info("insert its price");
 	    			price=Integer.parseInt(con.nextLine());
 	    			Product p=new Product(id,name,price);
 	    			String pr =system.addProduct(p);
-	    			System.out.println(pr);
+	    			LOGGER.info(pr);
 	    			continue;
 	    		}
 	    		else if(s1.equals("D")) {
-	    			System.out.println("insert the id for product to delete it");
+	    			LOGGER.info("insert the id for product to delete it");
 	    			String id=con.nextLine();
 	    			String pr =system.deleteProduct(id);
-	    			System.out.println(pr);
+	    			LOGGER.info(pr);
 	    			continue;
 	    		}
 	    		else if(s1.equals("U")) {
-	    			System.out.println("insert what you want to update");
+	    			LOGGER.info("insert what you want to update");
 	    			String whatUpdate=con.nextLine();
-	    			System.out.println("insert the id for product");
+	    			LOGGER.info("insert the id for product");
 	    			String id=con.nextLine();
-	    			System.out.println("insert the new value");
+	    			LOGGER.info("insert the new value");
 	    			String newValue=con.nextLine();
 	    			String pr =system.updateProduct(newValue, id, username);
-	    			System.out.println(pr);
+	    			LOGGER.info(pr);
 	    			continue;
 	    			
 	    		}
@@ -201,7 +204,7 @@ public class MyMain {
 	    			break;
 	    		}
 	    		else {
-	    			System.out.println("plz enter valid value!");
+	    			LOGGER.info("plz enter valid value!");
 	    			continue;
 	    		}}
 	    		continue;
@@ -213,19 +216,19 @@ public class MyMain {
 	    		String wId="123";
 	    		int numOfOrder;
 	    		oId=Integer.toString( system.orders.size());
-	    		System.out.println("insert id of the customer who has this order");
+	    		LOGGER.info("insert id of the customer who has this order");
 	    		cId=con.nextLine();
 	    		if(! (system.customerValid(cId))) {
-	    			System.out.println("this customer is not exist! plz enter exist id!");
+	    			LOGGER.info("this customer is not exist! plz enter exist id!");
 	    			cId=con.nextLine();
 	    		}
-	    		System.out.println("insert what's the  product he want to clean");
+	    		LOGGER.info("insert what's the  product he want to clean");
 	    		productList();
 	    		pId=con.nextLine();
 	    		if(!(system.productValid(pId))) {
-	    			System.out.println("this product is not exist! plz enter exist id!");
+	    			LOGGER.info("this product is not exist! plz enter exist id!");
     			    pId=con.nextLine();}
-	    		System.out.println("insert number of products he want");
+	    		LOGGER.info("insert number of products he want");
 	    		numOfOrder=Integer.valueOf(con.nextLine());
 	    		int wflag=0;
 	    		for(int k=0;k<system.workers.size();k++) {
@@ -236,11 +239,10 @@ public class MyMain {
 	    				break;
 	    			}}
 	    		int indexc=0;int indexp=0;
-	    		System.out.println("Does he want us to deliver the order? , just write Y for yes  or N for no");
+	    		LOGGER.info("Does he want us to deliver the order? , just write Y for yes  or N for no");
 	    		String dflag=con.nextLine();
 	    		for(int i=0;i<system.customers.size();i++) {
 	    			if(system.customers.get(i).id.equals(cId)) {
-	    				email=system.customers.get(i).email;
 	    				indexc=i;
 	    				for(int j=0;j<system.products.size();j++) {
 	    					if(system.products.get(j).id.equals(pId))
@@ -263,8 +265,8 @@ public class MyMain {
 	    		o.setStatus(Status.INTREATMENT);
 	    		
 	    		int invoice=deliveryPrice+productPrice;
-    			System.out.println("His invoice is :"+invoice);
-	    		System.out.println("Status for order now is in treatment,when worker finish insert C for complete ");
+	    		LOGGER.info("His invoice is :"+invoice);
+	    		LOGGER.info("Status for order now is in treatment,when worker finish insert C for complete ");
 	    		while(true) {
 	    		String stat=con.nextLine();
 	    		if(stat.equals("C")) {
@@ -272,12 +274,12 @@ public class MyMain {
 	    			system.orders.add(o);
 	    			system.customers.get(indexc).numOfReq+=1;
 	    			system.workers.get(wflag).setIsFree(true);
-	    			System.out.println("order complete ...");
+	    			LOGGER.info("order complete ...");
 	    			
 	    			break;
 	    		}
 	    		else  {
-	    			System.out.println("Insert valid status !");
+	    			LOGGER.info("Insert valid status !");
 	    			continue;
 	    		}
 	    		}
@@ -285,47 +287,27 @@ public class MyMain {
 	    		continue;
 	    	}
 	    	else if(choice.equals("4")) {
-	    		int i;
-	    		System.out.println("These customers are registered in the system");
-	    		System.out.printf("%-20s|%-20s|%-25s|%-20s|%-10s|%-20s|%n","Id","Name","email","Number of request","Phone","address");
-	    		for ( i=0;i<system.customers.size();i++) {	                
-	                System.out.printf("%-20s|%-20s|%-25s|%-20d|%-10s|%-20s|%n",system.customers.get(i).id,system.customers.get(i).name,system.customers.get(i).email,system.customers.get(i).numOfReq,system.customers.get(i).phone,system.customers.get(i).address);
-	    		}
-	    		i=0;
-	    		System.out.println("_____________________________________________________________________________________________________________"+"\n");
-	    		System.out.println("These products are valid in the system");
-	    		System.out.printf("%-10s|%-42s|%-10s|%n","Id","Name","price");
-	    		for (i=0;i<system.products.size();i++) {
-	                
-	                System.out.printf("%-10s|%-42s|%-10d|%n",system.products.get(i).id,system.products.get(i).name,system.products.get(i).price);	
-	    		}
-	    		i=0;
-	    		System.out.println("_____________________________________________________________________________________________________________"+"\n");
-	    		System.out.println("These workers works in the system");
-	    		System.out.printf("%-10s|%-20s|%-11s|%-15s|%n","Id","Name","Phone","address");
-	    		for(i=0;i<system.workers.size();i++) {	                 
-	                 System.out.printf("%-10s|%-20s|%-11s|%-15s|%n",system.workers.get(i).id,system.workers.get(i).name,system.workers.get(i).phone,system.workers.get(i).address);	    			
-	    		}
+	    		system.report();
 	    		continue;
 	    	}
 	    	else if(choice.equals("5")) {
-	    		System.out.println("Insert C fot total cash ,P for total paid and Dfor delivered items") ; 
-	    		System.out.println("You can enter B to back to the list !");
+	    		LOGGER.info("Insert C fot total cash ,P for total paid and Dfor delivered items") ; 
+	    		LOGGER.info("You can enter B to back to the list !");
 	    		while(true) {
 	    			String s2=con.nextLine();
 	    			if(s2.equals("C")) {
 	    				int c = system.totalCash();
-	    				System.out.println("Total cash = "+c);
+	    				LOGGER.info("Total cash = "+c);
 	    				continue;
 	    			}
 	    			else if(s2.equals("P")) {
 	    				int p = system.totalPaid();
-	    				System.out.println("Total paid = "+ p);
+	    				LOGGER.info("Total paid = "+ p);
 	    				continue;
 	    			}
 	    			else if(s2.equals("D")){
 	    				int d = system.totaldelivery();
-	    				System.out.println("Total delivered item = "+d);
+	    				LOGGER.info("Total delivered item = "+d);
 	    				continue;
 	    			}
 	    			else if(s2.equals("B")) {
@@ -333,7 +315,7 @@ public class MyMain {
 	    				break;
 	    			}
 	    			else {
-		    			System.out.println("plz enter valid value!");
+	    				LOGGER.info("plz enter valid value!");
 		    			continue;
 		    		}
 	    					
@@ -342,12 +324,12 @@ public class MyMain {
 	    		continue;
 	    	}
 	    	else if(choice.equals("6")) {
-	    		System.out.println("Logout successfully");
+	    		LOGGER.info("Logout successfully");
 	    		admin.logOut();
 	    		break;
 	    	}
 	    	else {
-	    		System.out.println("plz insert valid choice !! ");
+	    		LOGGER.info("plz insert valid choice !! ");
 	    		continue;
 	    	}
 	    	}

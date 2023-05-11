@@ -2,6 +2,8 @@ package system;
 
 import java.util.LinkedList;
 import java.util.Properties;
+import java.util.logging.Logger;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -12,17 +14,42 @@ import javax.mail.internet.MimeMessage;
 
 
 public class MySystem {
+    private static final Logger LOGGER = Logger.getLogger(MyMain.class.getName());
+
 	 LinkedList<Customer> customers =new LinkedList<Customer>();
 	 LinkedList<Product> products=new LinkedList<Product>();
 	 LinkedList<Worker> workers=new LinkedList<Worker>();
 	 LinkedList<Order> orders=new LinkedList<Order>();	
 	
 	public boolean report() {
-		String s= " this is the report";
-		if(s.equals(" this is the report"))
+		int i;
+		LOGGER.info("These customers are registered in the system");
+		String header = String.format("%-20s|%-20s|%-25s|%-20s|%-10s|%-20s|%n","Id","Name","email","Number of request","Phone","address");
+		LOGGER.info(header);
+		for ( i=0;i<customers.size();i++) {	                
+			 header = String.format("%-20s|%-20s|%-25s|%-20d|%-10s|%-20s|%n",customers.get(i).id,customers.get(i).name,customers.get(i).email,customers.get(i).numOfReq,customers.get(i).phone,customers.get(i).address);
+			 LOGGER.info(header);
+		}
+		i=0;
+		LOGGER.info("_____________________________________________________________________________________________________________"+"\n");
+		LOGGER.info("These products are valid in the system");
+		header = String.format("%-10s|%-42s|%-10s|%n","Id","Name","price");
+		LOGGER.info(header);
+		for (i=0;i<products.size();i++) {
+			header = String.format("%-10s|%-42s|%-10d|%n",products.get(i).id,products.get(i).name,products.get(i).price);	
+			LOGGER.info(header);
+		}
+		
+		i=0;
+		LOGGER.info("_____________________________________________________________________________________________________________"+"\n");
+		LOGGER.info("These workers works in the system");
+		header = String.format("%-10s|%-20s|%-11s|%-15s|%n","Id","Name","Phone","address");
+		LOGGER.info(header);
+		for(i=0;i<workers.size();i++) {	                 
+			header = String.format("%-10s|%-20s|%-11s|%-15s|%n",workers.get(i).id,workers.get(i).name,workers.get(i).phone,workers.get(i).address);	    			
+			LOGGER.info(header);
+		}
 		return true;
-		else {
-		return false;}
 	}
 	
 	public int totalCash() {
