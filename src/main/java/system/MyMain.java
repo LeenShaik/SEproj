@@ -106,59 +106,49 @@ public class MyMain {
 	    		LOGGER.info("Enter A for add , D for delete and U for update customer");	    		
 	    		LOGGER.info(BACK);
 	    		
-	    		while(true) {
-	    		String s =con.nextLine();
-	    		if(s.equals("A")) {
-	    			String  id;
-	    			String name;
-	    			String email; 
-	    			String phone;
-	    			String address;
-	    			int numOfReq=0;
-	    			LOGGER.info("insert his id");
-	    			id=con.nextLine();
-	    			LOGGER.info("insert his name");
-	    			name=con.nextLine();
-	    			LOGGER.info("insert his email");
-	    			email=con.nextLine();
-	    			LOGGER.info("insert his phone");
-	    			phone=con.nextLine();
-	    			LOGGER.info("insert his address");
-	    			address=con.nextLine();
-	    			Customer c=new Customer(id,name,email,numOfReq,phone,address);
-	    			String pr = system.register(c);
-	    			System.out.println(pr);
-	    			continue;
-	    					}
-	    		else if(s.equals("D")) {
-	    			LOGGER.info("insert the id for customer to delete him");
-	    			String id=con.nextLine();
-	    			String pr=system.deleteCustomer(id);
-	    			LOGGER.info(pr);
-	    			continue;
-	    						}
-	    		else if(s.equals("U")) {
-	    			LOGGER.info("insert what you want to update ");
-	    			String whatUpdate=con.nextLine();
-	    			LOGGER.info("insert the id for customer ");
-	    			String id=con.nextLine();
-	    			LOGGER.info("insert the new value");
-	    			String newValue=con.nextLine();
-	    			String pr=system.update(whatUpdate, id, newValue);
-	    			LOGGER.info(pr);
-	    			continue;
-    			
-	    						}
-	    		else if (s.equals("B")) {
-	    			list();
-	    			break;
-	    						}
-	    		else {
-	    			LOGGER.info("plz enter valid value!");
-	    			continue;
-	    			 }
+	    		while (true) {
+	    		    String s = con.nextLine();
+	    		    if (s.equals("A")) {
+	    		        String id;
+	    		        String name;
+	    		        String email;
+	    		        String phone;
+	    		        String address;
+	    		        int numOfReq = 0;
+	    		        LOGGER.info("insert his id");
+	    		        id = con.nextLine();
+	    		        LOGGER.info("insert his name");
+	    		        name = con.nextLine();
+	    		        LOGGER.info("insert his email");
+	    		        email = con.nextLine();
+	    		        LOGGER.info("insert his phone");
+	    		        phone = con.nextLine();
+	    		        LOGGER.info("insert his address");
+	    		        address = con.nextLine();
+	    		        Customer c = new Customer(id, name, email, numOfReq, phone, address);
+	    		        String pr = system.register(c);
+	    		        System.out.println(pr);
+	    		    } else if (s.equals("D")) {
+	    		        LOGGER.info("insert the id for customer to delete him");
+	    		        String id = con.nextLine();
+	    		        String pr = system.deleteCustomer(id);
+	    		        LOGGER.info(pr);
+	    		    } else if (s.equals("U")) {
+	    		        LOGGER.info("insert what you want to update ");
+	    		        String whatUpdate = con.nextLine();
+	    		        LOGGER.info("insert the id for customer ");
+	    		        String id = con.nextLine();
+	    		        LOGGER.info("insert the new value");
+	    		        String newValue = con.nextLine();
+	    		        String pr = system.update(whatUpdate, id, newValue);
+	    		        LOGGER.info(pr);
+	    		    } else if (s.equals("B")) {
+	    		        list();
+	    		        break;
+	    		    } else {
+	    		        LOGGER.info("plz enter valid value!");
+	    		    }
 	    		}
-	    		continue;
 	    		}
 	    	else if(choice.equals("2")) {
 	    		LOGGER.info("Enter A for add , D for delete and U for update product");
@@ -178,14 +168,12 @@ public class MyMain {
 	    			Product p=new Product(id,name,price);
 	    			String pr =system.addProduct(p);
 	    			LOGGER.info(pr);
-	    			continue;
 	    		}
 	    		else if(s1.equals("D")) {
 	    			LOGGER.info("insert the id for product to delete it");
 	    			String id=con.nextLine();
 	    			String pr =system.deleteProduct(id);
 	    			LOGGER.info(pr);
-	    			continue;
 	    		}
 	    		else if(s1.equals("U")) {
 	    			LOGGER.info("insert what you want to update");
@@ -196,7 +184,6 @@ public class MyMain {
 	    			String newValue=con.nextLine();
 	    			String pr =system.updateProduct(newValue, id, username);
 	    			LOGGER.info(pr);
-	    			continue;
 	    			
 	    		}
 	    		else if (s1.equals("B")) {
@@ -205,9 +192,7 @@ public class MyMain {
 	    		}
 	    		else {
 	    			LOGGER.info("plz enter valid value!");
-	    			continue;
 	    		}}
-	    		continue;
 	    	}
 	    	else if (choice.equals("3")) {
 	    		String oId;
@@ -275,53 +260,47 @@ public class MyMain {
 	    			system.customers.get(indexc).numOfReq+=1;
 	    			system.workers.get(wflag).setIsFree(true);
 	    			LOGGER.info("order complete ...");
-	    			
 	    			break;
 	    		}
 	    		else  {
 	    			LOGGER.info("Insert valid status !");
-	    			continue;
+	
 	    		}
 	    		}
 	    		
-	    		continue;
+
 	    	}
 	    	else if(choice.equals("4")) {
 	    		system.report();
-	    		continue;
+
 	    	}
 	    	else if(choice.equals("5")) {
 	    		LOGGER.info("Insert C fot total cash ,P for total paid and Dfor delivered items") ; 
 	    		LOGGER.info("You can enter B to back to the list !");
 	    		while(true) {
 	    			String s2=con.nextLine();
-	    			if(s2.equals("C")) {
-	    				int c = system.totalCash();
-	    				LOGGER.info("Total cash = "+c);
-	    				continue;
-	    			}
-	    			else if(s2.equals("P")) {
-	    				int p = system.totalPaid();
-	    				LOGGER.info("Total paid = "+ p);
-	    				continue;
-	    			}
-	    			else if(s2.equals("D")){
-	    				int d = system.totaldelivery();
-	    				LOGGER.info("Total delivered item = "+d);
-	    				continue;
-	    			}
-	    			else if(s2.equals("B")) {
-	    				list();
-	    				break;
-	    			}
-	    			else {
-	    				LOGGER.info("plz enter valid value!");
-		    			continue;
-		    		}
+	    		    if(s2.equals("C")) {
+	    		        int c = system.totalCash();
+	    		        LOGGER.info("Total cash = "+c);
+	    		    }
+	    		    else if(s2.equals("P")) {
+	    		        int p = system.totalPaid();
+	    		        LOGGER.info("Total paid = "+ p);
+	    		    }
+	    		    else if(s2.equals("D")){
+	    		        int d = system.totaldelivery();
+	    		        LOGGER.info("Total delivered item = "+d);
+	    		    }
+	    		    else if(s2.equals("B")) {
+	    		        list();
+	    		        break;
+	    		    }
+	    		    else {
+	    		        LOGGER.info("plz enter valid value!");
+	    		    }
 	    					
 	    		}
 	    		
-	    		continue;
 	    	}
 	    	else if(choice.equals("6")) {
 	    		LOGGER.info("Logout successfully");
@@ -330,7 +309,6 @@ public class MyMain {
 	    	}
 	    	else {
 	    		LOGGER.info("plz insert valid choice !! ");
-	    		continue;
 	    	}
 	    	}
 	   
