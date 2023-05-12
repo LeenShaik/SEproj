@@ -111,7 +111,7 @@ public class MyMain {
 	    		        address = con.nextLine();
 	    		        Customer c = new Customer(id, name, email, numOfReq, phone, address);
 	    		        String pr = system.register(c);
-	    		        System.out.println(pr);
+	    		        LOGGER.info(pr);
 	    		    } else if (s.equals("D")) {
 	    		        LOGGER.info("insert the id for customer to delete him");
 	    		        String id = con.nextLine();
@@ -235,7 +235,9 @@ public class MyMain {
 	    		o.setStatus(Status.INTREATMENT);
 	    		
 	    		int invoice=deliveryPrice+productPrice;
-	    		LOGGER.info(String.format("His invoice is : %d",invoice));
+	    		if (invoice >= 0) {
+	    		    LOGGER.info(String.format("His invoice is: %d", invoice));
+	    		}
 	    		LOGGER.info("Status for order now is in treatment,when worker finish insert C for complete ");
 	    		while(true) {
 	    		String stat=con.nextLine();
@@ -266,15 +268,18 @@ public class MyMain {
 	    			String s2=con.nextLine();
 	    		    if(s2.equals("C")) {
 	    		        int c = system.totalCash();
-	    		        LOGGER.info(String.format("Total cash = %d",c));
+	    		        if(c>=0) {
+	    		        LOGGER.info(String.format("Total cash = %d",c));}
 	    		    }
 	    		    else if(s2.equals("P")) {
 	    		        int p = system.totalPaid();
-	    		        LOGGER.info(String.format("Total paid = %d", p));
+	    		        if(p>=0) {
+	    		        LOGGER.info(String.format("Total paid = %d", p));}
 	    		    }
 	    		    else if(s2.equals("D")){
 	    		        int d = system.totaldelivery();
-	    		        LOGGER.info(String.format("Total delivered item = %d",d));
+	    		        if (d>=0) {
+	    		        LOGGER.info(String.format("Total delivered item = %d",d));}
 	    		    }
 	    		    else if(s2.equals("B")) {
 	    		        list();
