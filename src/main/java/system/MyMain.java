@@ -32,6 +32,7 @@ public class MyMain {
 	}
 	
 	public static void main(String[] args) {
+		String header;
 		MySystem system =new MySystem();
 		system.customers.add(new Customer("id1","faihaa odeh","s11923877@stu.najah.edu",5,"0599773638","DerAlhatab"));
 		system.customers.add(new Customer("id2","lana jaber","faihaa.odeh20@gmail.com",2,"0595721772","rafidia"));
@@ -235,9 +236,9 @@ public class MyMain {
 	    		o.setStatus(Status.INTREATMENT);
 	    		
 	    		int invoice=deliveryPrice+productPrice;
-	    		if (invoice >= 0) {
-	    		    LOGGER.info(String.format("His invoice is: %d", invoice));
-	    		}
+	    		header = String.format("His invoice is: %d", invoice);
+	    		LOGGER.info(header);
+	    		
 	    		LOGGER.info("Status for order now is in treatment,when worker finish insert C for complete ");
 	    		while(true) {
 	    		String stat=con.nextLine();
@@ -268,18 +269,18 @@ public class MyMain {
 	    			String s2=con.nextLine();
 	    		    if(s2.equals("C")) {
 	    		        int c = system.totalCash();
-	    		        if(c>=0) {
-	    		        LOGGER.info(String.format("Total cash = %d",c));}
+	    		        header = String.format("Total cash = %d",c);
+	    		        LOGGER.info(header);
 	    		    }
 	    		    else if(s2.equals("P")) {
 	    		        int p = system.totalPaid();
-	    		        if(p>=0) {
-	    		        LOGGER.info(String.format("Total paid = %d", p));}
+	    		        header = String.format("Total paid = %d", p);	    		        	
+	    		        LOGGER.info(header);
 	    		    }
 	    		    else if(s2.equals("D")){
 	    		        int d = system.totaldelivery();
-	    		        if (d>=0) {
-	    		        LOGGER.info(String.format("Total delivered item = %d",d));}
+	    		        header = String.format("Total delivered item = %d",d);
+	    		        LOGGER.info("Total delivered item =");
 	    		    }
 	    		    else if(s2.equals("B")) {
 	    		        list();
