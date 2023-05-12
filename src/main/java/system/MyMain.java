@@ -9,6 +9,7 @@ public class MyMain {
 	static final String ID1="123456";
 	static final String ID2="113456";
 	static final String BACK="You can enter B to back to the list !";
+	static final String VALID="plz enter valid value!";
     private static final Logger LOGGER = Logger.getLogger(MyMain.class.getName());
 
 	public static void list() {
@@ -32,35 +33,20 @@ public class MyMain {
 	
 	public static void main(String[] args) {
 		MySystem system =new MySystem();
-	
+		system.customers.add(new Customer("id1","faihaa odeh","s11923877@stu.najah.edu",5,"0599773638","DerAlhatab"));
+		system.customers.add(new Customer("id2","lana jaber","faihaa.odeh20@gmail.com",2,"0595721772","rafidia"));
+		system.customers.add(new Customer("987654","jana taher","s11819423@stu.najah.edu",1,"0593020265","makhfia"));
 		
-
-		Customer customer=new Customer("id1","faihaa odeh","s11923877@stu.najah.edu",5,"0599773638","DerAlhatab");
-		system.customers.add(customer);
-		customer=new Customer("id2","lana jaber","faihaa.odeh20@gmail.com",2,"0595721772","rafidia");
-		system.customers.add(customer);
-		customer=new Customer("987654","jana taher","s11819423@stu.najah.edu",1,"0593020265","makhfia");
-		system.customers.add(customer);
+		system.products.add(new Product("0","CARPET minimum than 9",15));
+		system.products.add(new Product("1","CARPET greater than 9 and smaller than 16",20));
+		system.products.add(new Product("2","CARPET greater than 16",30));
+		system.products.add(new Product("3","SINGLECOVER",13));
+		system.products.add(new Product("4","COUPLECOVER",20));
+		system.products.add(new Product("5","CURTAIN",8));
 		
-		Product product=new Product("0","CARPET minimum than 9                    ",15);
-		system.products.add(product);
-		product=new Product("1","CARPET greater than 9 and smaller than 16",20);
-		system.products.add(product);
-		product=new Product("2","CARPET greater than 16",30);
-		system.products.add(product);
-		product=new Product("3","SINGLECOVER",13);
-		system.products.add(product);
-		product=new Product("4","COUPLECOVER",20);
-		system.products.add(product);
-		product=new Product("5","CURTAIN",8);
-		system.products.add(product);
-		
-		Worker worker=new Worker("123","hamza ahmad","0598937949","Rafedia",true);
-		system.workers.add(worker);
-		worker=new Worker("113","taher yaseen","0599894568","Rafedia",true);
-		system.workers.add(worker);
-		worker=new Worker("223","ayman mohammed","059378568","makhfia",true);
-		system.workers.add(worker);
+		system.workers.add(new Worker("123","hamza ahmad","0598937949","Rafedia",true));
+		system.workers.add(new Worker("113","taher yaseen","0599894568","Rafedia",true));
+		system.workers.add(new Worker("223","ayman mohammed","059378568","makhfia",true));
 		
 		Order order=new Order("1","id1","0","123",1,20,15);
 		order.setStatus(Status.COMPLETE);
@@ -88,13 +74,11 @@ public class MyMain {
 		system.orders.add(order);
 		
 		Admin admin =new Admin ();
-		String username;
-		String password;
 		Scanner con = new Scanner(System.in);
 		LOGGER.info("Enter username:");
-	    username = con.nextLine();
+	    String username = con.nextLine();
 	    LOGGER.info("Enter password:");
-	    password = con.nextLine();
+	    String password = con.nextLine();
 	    
 	    if(admin.login(username, password)) {
 	    	
@@ -146,7 +130,7 @@ public class MyMain {
 	    		        list();
 	    		        break;
 	    		    } else {
-	    		        LOGGER.info("plz enter valid value!");
+	    		        LOGGER.info(VALID);
 	    		    }
 	    		}
 	    		}
@@ -182,7 +166,7 @@ public class MyMain {
 	    			String id=con.nextLine();
 	    			LOGGER.info("insert the new value");
 	    			String newValue=con.nextLine();
-	    			String pr =system.updateProduct(newValue, id, username);
+	    			String pr =system.updateProduct(newValue, id, whatUpdate);
 	    			LOGGER.info(pr);
 	    			
 	    		}
@@ -191,7 +175,7 @@ public class MyMain {
 	    			break;
 	    		}
 	    		else {
-	    			LOGGER.info("plz enter valid value!");
+	    			LOGGER.info(VALID);
 	    		}}
 	    	}
 	    	else if (choice.equals("3")) {
@@ -223,7 +207,8 @@ public class MyMain {
 	    				wflag=k;
 	    				break;
 	    			}}
-	    		int indexc=0;int indexp=0;
+	    		int indexc=0;
+	    		int indexp=0;
 	    		LOGGER.info("Does he want us to deliver the order? , just write Y for yes  or N for no");
 	    		String dflag=con.nextLine();
 	    		for(int i=0;i<system.customers.size();i++) {
@@ -250,7 +235,7 @@ public class MyMain {
 	    		o.setStatus(Status.INTREATMENT);
 	    		
 	    		int invoice=deliveryPrice+productPrice;
-	    		LOGGER.info("His invoice is :"+invoice);
+	    		LOGGER.info(String.format("His invoice is : %d",invoice));
 	    		LOGGER.info("Status for order now is in treatment,when worker finish insert C for complete ");
 	    		while(true) {
 	    		String stat=con.nextLine();
@@ -263,7 +248,7 @@ public class MyMain {
 	    			break;
 	    		}
 	    		else  {
-	    			LOGGER.info("Insert valid status !");
+	    			LOGGER.info(VALID);
 	
 	    		}
 	    		}
@@ -276,27 +261,27 @@ public class MyMain {
 	    	}
 	    	else if(choice.equals("5")) {
 	    		LOGGER.info("Insert C fot total cash ,P for total paid and Dfor delivered items") ; 
-	    		LOGGER.info("You can enter B to back to the list !");
+	    		LOGGER.info(BACK);
 	    		while(true) {
 	    			String s2=con.nextLine();
 	    		    if(s2.equals("C")) {
 	    		        int c = system.totalCash();
-	    		        LOGGER.info("Total cash = "+c);
+	    		        LOGGER.info(String.format("Total cash = %d",c));
 	    		    }
 	    		    else if(s2.equals("P")) {
 	    		        int p = system.totalPaid();
-	    		        LOGGER.info("Total paid = "+ p);
+	    		        LOGGER.info(String.format("Total paid = %d", p));
 	    		    }
 	    		    else if(s2.equals("D")){
 	    		        int d = system.totaldelivery();
-	    		        LOGGER.info("Total delivered item = "+d);
+	    		        LOGGER.info(String.format("Total delivered item = %d",d));
 	    		    }
 	    		    else if(s2.equals("B")) {
 	    		        list();
 	    		        break;
 	    		    }
 	    		    else {
-	    		        LOGGER.info("plz enter valid value!");
+	    		        LOGGER.info(VALID);
 	    		    }
 	    					
 	    		}
@@ -308,7 +293,7 @@ public class MyMain {
 	    		break;
 	    	}
 	    	else {
-	    		LOGGER.info("plz insert valid choice !! ");
+	    		LOGGER.info(VALID);
 	    	}
 	    	}
 	   

@@ -57,7 +57,7 @@ public class WorkerAvailable {
 
 	@Then("the status change to intreatment")
 	public void the_status_change_to_intreatment() {
-	    assertEquals(o.getStatus(),Status.INTREATMENT);
+	    assertEquals(Status.INTREATMENT,o.getStatus());
 
 	
 	
