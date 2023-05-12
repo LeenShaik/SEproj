@@ -13,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 
 public class MySystem {
     private static final Logger LOGGER = Logger.getLogger(MySystem.class.getName());
-    static final String Address="Address";
+    static final String ADDRESS="Address";
 	 LinkedList<Customer> customers =new LinkedList<Customer>();
 	 LinkedList<Product> products=new LinkedList<Product>();
 	 LinkedList<Worker> workers=new LinkedList<Worker>();
@@ -22,7 +22,7 @@ public class MySystem {
 	public boolean report() {
 		int i;
 		LOGGER.info("These customers are registered in the system");
-		String header = String.format("%-20s|%-20s|%-25s|%-20s|%-10s|%-20s|%n","Id","Name","email","Number of request","Phone",Address);
+		String header = String.format("%-20s|%-20s|%-25s|%-20s|%-10s|%-20s|%n","Id","Name","email","Number of request","Phone",ADDRESS);
 		LOGGER.info(header);
 		for ( i=0;i<customers.size();i++) {	                
 			 header = String.format("%-20s|%-20s|%-25s|%-20d|%-10s|%-20s|%n",customers.get(i).id,customers.get(i).name,customers.get(i).email,customers.get(i).numOfReq,customers.get(i).phone,customers.get(i).address);
@@ -41,7 +41,7 @@ public class MySystem {
 		i=0;
 		LOGGER.info("_____________________________________________________________________________________________________________"+"\n");
 		LOGGER.info("These workers works in the system");
-		header = String.format("%-10s|%-20s|%-11s|%-15s|%n","Id","Name","Phone",Address);
+		header = String.format("%-10s|%-20s|%-11s|%-15s|%n","Id","Name","Phone",ADDRESS);
 		LOGGER.info(header);
 		for(i=0;i<workers.size();i++) {	                 
 			header = String.format("%-10s|%-20s|%-11s|%-15s|%n",workers.get(i).id,workers.get(i).name,workers.get(i).phone,workers.get(i).address);	    			
@@ -186,15 +186,12 @@ public class MySystem {
 		return (flag == 1);
 	}
 	public boolean productValid(String id) {
-		int flag=0;
+		boolean flag=false;
 		for(int i=0;i<products.size();i++) {
 			if(products.get(i).id.equals(id))
-				flag =1;
+				flag =true;
 		}
-		if(flag==1)
-			return true;
-		else 
-			return false;
+		return flag;
 	}
 	
 	public String distribute( Order o) {
