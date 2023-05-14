@@ -8,14 +8,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class LogOut {
-	public Admin a;
-	public MySystem s;
-	public LogOut(MySystem s,Admin a) {
-		this.s=s;
-		this.a=a;
-	}
+	public Admin a=new Admin();
 	
-
 @Given("that admin is logged in")
 public void that_admin_is_logged_in() {
     a.setLoginState(true);

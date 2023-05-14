@@ -12,14 +12,12 @@ Background: The System has these products
   
 
 Scenario: product update faild
-Given that the admin is logged in
-And he want to update product that its id  "7"
+Given he want to update product that its id "7"
 When admin tries to update a product "price" to "14"
-Then  massage "product is not valid" should display
+Then  update faild
 
 Scenario: product update success
-Given that the admin is logged in
-And he want to update product that its id "3" 
+Given he want to update product that its id "3" 
 When admin tries to update a product "price" to "14"
-Then massage "product updated successfully" should display
+Then update success
 

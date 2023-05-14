@@ -1,24 +1,16 @@
 package system;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 public class DiscountTest {
-	
-	Customer c;
+	Customer c = new Customer ("987654","jana taher","s11819423@stu.najah.edu",1,"0593020265","makhfia");
 	MySystem ms;
 	Product p;
-	public void DiscountTest(Customer c,MySystem ms,Product p) {
-		this.c=c;
-		this.ms=ms;
-		this.p=p;
-		
-	}
+	
 	
 	@Given("that the count of request for customer is {int}")
 	public void that_the_count_of_request_for_customer_is(Integer int1) {

@@ -8,10 +8,7 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features ="use_cases/deleteCustomer.feature",
-		monochrome=true,
-		snippets = SnippetType.CAMELCASE,
-		glue = {"system"})
+		features ="use_cases",glue = {"system"})
 public class AcceptanceTest {
 
 }

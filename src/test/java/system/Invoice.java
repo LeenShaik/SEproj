@@ -7,56 +7,57 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 public class Invoice {
-	
-	Customer c;
-    MySystem ms;
+    MySystem system=new MySystem();
     Product p;
     Order o;
+    String cid,pid;
+    int cindex=0,pindex=0;
 
-    
-	public Invoice(MySystem ms ,Customer c ,Product p ,Order o) {
-		this.c=c;
-		this.ms=ms;
-		this.p=p;
-		o.cId=c.id;
-		o.pId=p.id;
-		
-		
-	}
-	@Given("that these customers are registered in the system")
+	@Given("these customers are registered in the system")
 	public void that_these_customers_are_registered_in_the_system(io.cucumber.datatable.DataTable dataTable) {
-		String id,name,email,phone,address;
-		int numOfReq;
-		for(int i=0; i<3;i++) {
-			id=dataTable.cell(i, 0);
-			name=dataTable.cell(i,1);
-			email=dataTable.cell(i,2);
-			numOfReq=Integer.parseInt(dataTable.cell(i, 3));
-			phone=dataTable.cell(i,4);
-			address=dataTable.cell(i,5);
-			c=new Customer(id,name,email,numOfReq,phone,address);
-			ms.customers.add(c);   
-			}
-	    throw new io.cucumber.java.PendingException();
+		system.customers.add(new Customer("123456","faihaa odeh","s11923877@stu.najah.edu",5,"0599773638","DerAlhatab"));
+		system.customers.add(new Customer("113456","lana jaber","faihaa.odeh20@gmail.com",2,"0595721772","rafidia"));
+		system.customers.add(new Customer("987654","jana taher","s11819423@stu.najah.edu",1,"0593020265","makhfia"));
+		
+
+		system.products.add(new Product("0","CARPET minimum than 9",15));
+		system.products.add(new Product("1","CARPET greater than 9 and smaller than 16",20));
+		system.products.add(new Product("2","CARPET greater than 16",30));
+		system.products.add(new Product("3","SINGLECOVER",13));
+		system.products.add(new Product("4","COUPLECOVER",20));
+		system.products.add(new Product("5","CURTAIN",8));
 	}
 
 	@Given("that the customer with id {string}")
 	public void that_the_customer_with_id(String string) {
-	 c.id=string;
+	 cid=string;
+	 for(int i =0;i<system.customers.size();i++) {
+			if(system.customers.get(i).id .equals(cid)) {
+				cindex=i;
+				break;
+				}
+			
+		}
 	}
 
 	
 	@Given("he want to clean product with id {string}")
 	public void he_want_to_clean_product_with_id(String string) {
-	   p.id=string;
+	   pid=string;
+	   for(int i =0;i<system.products.size();i++) {
+			if(system.products.get(i).id .equals(pid)) {
+				pindex=i;
+				break;}
+		}
 	}
 
 
 	@Then("the price is {int}")
-	public void the_price_is(Integer int1) {
+	public void the_price_is(int int1) {
+		
 		int expected=int1;
-		int price=ms.productPriceCalc(c, p, 1);
-		int d=ms.diliveryPriceCalc(c);
+		int price=system.productPriceCalc(system.customers.get(cindex),system.products.get(pindex), 1);
+		int d = system.diliveryPriceCalc(system.customers.get(cindex));
 		int total=price+d;
 		assertEquals(expected,total);
 	

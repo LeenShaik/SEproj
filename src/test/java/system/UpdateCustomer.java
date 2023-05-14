@@ -8,41 +8,25 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class UpdateCustomer {
-	public Admin a;
-	public Customer c;
-	public MySystem ms;
-	String s,ID,whatUpdate,newValue;
-	public UpdateCustomer(Admin a,MySystem ms,Customer c) {
-		this.a=a;
-		this.ms=ms;
-	}
+	public Admin a=new Admin();
+	public MySystem ms=new MySystem();
+	String ID,whatUpdate,newValue;
+	boolean check;
+	
 
 @Given("that these customers are registered in the system")
 public void that_these_customers_are_registered_in_the_system(io.cucumber.datatable.DataTable dataTable) {
-	String id,name,email,phone,address;
-	int numOfReq;
-	for(int i=0; i<3;i++) {
-		id=dataTable.cell(i, 0);
-		name=dataTable.cell(i,1);
-		email=dataTable.cell(i,2);
-		numOfReq=Integer.parseInt(dataTable.cell(i, 3));
-		phone=dataTable.cell(i,4);
-		address=dataTable.cell(i,5);
-		c=new Customer(id,name,email,numOfReq,phone,address);
-		ms.customers.add(c);   
-		}
-    throw new io.cucumber.java.PendingException();
+
+	ms.customers.add(new Customer("123456","faihaa odeh","s11923877@stu.najah.edu",5,"0599773638","DerAlhatab"));
+	ms.customers.add(new Customer("113456","lana jaber","faihaa.odeh20@gmail.com",2,"0595721772","rafidia"));
+	ms.customers.add(new Customer("987654","jana taher","s11819423@stu.najah.edu",1,"0593020265","makhfia"));
+	 
 }
 	
 
-@Given("that the admin is logged in")
-public void that_the_admin_is_logged_in() {
-    a.setLoginState(true);
-}
 
-
-@Given("he want to update customer that his id {string}")
-public void he_want_to_update_customer_that_his_id(String string) {
+@Given("that admin want to update customer that his id {string}")
+public void that_admin_want_to_update_customer_that_his_id(String string) {
     ID=string;
 }
 
@@ -50,12 +34,16 @@ public void he_want_to_update_customer_that_his_id(String string) {
 public void admin_tries_to_update_a_customer_to(String string,String string2) {
     whatUpdate=string;
 	newValue=string2;  
-	s=ms.update(whatUpdate,ID,newValue);
+	check=ms.update(whatUpdate,ID,newValue);
 }
 
-@Then("this msg {string} should display")
-public void this_msg_should_display(String string) {
-	assertEquals(string,s);
+@Then("customer updated faild")
+public void customer_updated_faild() {
+	assertTrue(!check);
+}
+@Then("customer updated successfully")
+public void customer_updated_successfully() {
+	assertTrue(check);
 }
 
 

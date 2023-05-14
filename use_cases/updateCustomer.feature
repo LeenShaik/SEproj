@@ -9,14 +9,12 @@ Background: The System has registered customers
 
 
 Scenario: customer update faild
-Given that the admin is logged in
-And he want to update customer that his id  "987987"
+Given that admin want to update customer that his id "987987"
 When admin tries to update a customer "address" to "rafidia" 
-Then this msg "customer is not registered" should display
+Then customer updated faild
 
 Scenario: customer update success
-Given that the admin is logged in
-And he want to update customer that his id  "987654"
+Given that admin want to update customer that his id "987654"
 When admin tries to update a customer "address" to "rafidia"
-Then this msg "customer updated successfully" should display
+Then customer updated successfully
 

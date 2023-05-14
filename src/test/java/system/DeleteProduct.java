@@ -7,53 +7,46 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class DeleteProduct {
-	public Admin a;
-	public MySystem ms;
-	public Product p;
-	String s,id;
+	public MySystem system=new MySystem();
+	String id;
 	int after,before;
 	
-	public DeleteProduct(Admin a,MySystem ms ,Product p) {
-		this.a=a;
-		this.ms=ms;
-		this.p=p;
-		
-	}
+
 	
 
-@Given("that these products are valid in the system")
-public void that_these_products_are_valid_in_the_system(io.cucumber.datatable.DataTable dataTable) {
-	String name,id ;
-	int price;
-	for(int i=0; i<6;i++) {
-		id=dataTable.cell(i, 0);
-		name=dataTable.cell(i,1);
-		price=Integer.parseInt(dataTable.cell(i,2));
-		p=new Product(id,name,price);
-		ms.products.add(p);   
-		}
-	before=ms.products.size();
-    throw new io.cucumber.java.PendingException();
+@Given("these products valid in the system")
+public void these_products_valid_in_the_system(io.cucumber.datatable.DataTable dataTable) {
+	system.products.add(new Product("0","CARPET minimum than 9",15));
+	system.products.add(new Product("1","CARPET greater than 9 and smaller than 16",20));
+	system.products.add(new Product("2","CARPET greater than 16",30));
+	system.products.add(new Product("3","SINGLECOVER",13));
+	system.products.add(new Product("4","COUPLECOVER",20));
+	system.products.add(new Product("5","CURTAIN",8));
 }
 
 
 
 @Given("that admin want to delete product that its id {string}")
 public void that_admin_want_to_delete_product_that_its_id(String string) {
+	before=system.products.size();
     id=string;
 }
 
 @When("admin tries to delete a product")
 public void admin_tries_to_delete_a_product() {
-	s=ms.deleteProduct(id);
-	after=ms.products.size();
+	system.deleteProduct(id);
+	after=system.products.size();
 
 }
 
-@Then("a massage {string} should display")
-public void a_massage_should_display(String string) {
-	assertEquals(string,s);
-	assertEquals(after,before-1);
+@Then("product deleted faild")
+public void product_deleted_faild() {
+	assertEquals(before,after);
+	
+}
+@Then("product deleted successfully")
+public void product_deleted_successfully() {
+	assertEquals(before-1,after);
 	
 }
 

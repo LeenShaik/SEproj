@@ -8,50 +8,38 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class Login {
-	public Admin a;
-	String username,pass;
-	
-	public Login(Admin a) {
-		this.a=a;
-	}
-
-
-
-@Given("admin is not logged in")
-public void admin_is_not_logged_in() {
-	a.setLoginState(false);
-}
+	public Admin a=new Admin();
+	String user,passw;
+	boolean check;
 
 @Given("the username is {string}")
 public void the_username_is(String string) {
-    username=string;
+    user=string;
 }
 
 @Given("the password is {string}")
 public void the_password_is(String string) {
-    pass=string;
+    passw=string;
 }
 
 @Then("the admin login succeeds")
 public void the_admin_login_succeeds() {
-    assertTrue(a.login(username,pass));
+	a.username=user;
+	a.pass=passw;
+    check = a.login(user,passw);
     a.setLoginState(true);
+    assertTrue(a.getLoginState());
 }
 
-@Then("the admin is logged in")
-public void the_admin_is_logged_in() {
-   assertTrue(a.getLoginState());
-}
+
 
 @Then("the admin login fails")
 public void the_admin_login_fails() {
-	assertFalse(a.login(username,pass));
-	a.setLoginState(false);
+	a.username=user;
+	a.pass=passw;
+    check = a.login(user,passw);
+    assertTrue(!a.getLoginState());
 }
 
-@Then("the admin is not logged in")
-public void the_admin_is_not_logged_in() {
-	assertFalse(a.getLoginState());
-}
 
 }

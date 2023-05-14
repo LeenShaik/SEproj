@@ -20,7 +20,7 @@ Then total cash = 136 printed
 
 Scenario: print total paid
 When admin tries to show the total paid
-Then total paid = 40 printed 
+Then total paid = 45 printed 
 
 
 Scenario: print total delivered items

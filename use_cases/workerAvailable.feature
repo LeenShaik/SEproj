@@ -12,6 +12,6 @@ Scenario: distribute work successfully
 Given that there is order with id "0"
 When admin tries to distribute the order to the worker
 And the worker is free
-Then msg"worker '123' received the order " display 
+Then available worker received the order 
 And the status change to intreatment
 

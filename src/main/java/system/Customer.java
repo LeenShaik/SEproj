@@ -1,7 +1,6 @@
 package system;
 
 public class Customer {
-
 	String id;
 	String name;
 	String email;
@@ -16,23 +15,45 @@ public class Customer {
 		this.address=address;
 		this.numOfReq=numOfReq;
 	}
-	public void setName(String name) {
-		this.name=name;
-	}
-	
-	public void setUserName(String email) {
-		this.email=email;
-	}
-	public void setAddress(String a) {
-		this.address=a;
-	}
-	public void setPhone(String p) {
-		this.phone=p;
-	}
-	public void setNumOfReq(int n) {
-		this.numOfReq=n;
-	}
-	
+	  public void setName(String name) {
+	        this.name = name;
+	    }
+
+	    public void setUserName(String email) {
+	        this.email = email;
+	    }
+
+	    public void setAddress(String address) {
+	        this.address = address;
+	    }
+
+	    public void setPhone(String phone) {
+	        this.phone = phone;
+	    }
+
+	    public void setNumOfReq(Integer numOfReq) {
+	        this.numOfReq = numOfReq;
+	    }
+
+	    public String getName() {
+	        return name;
+	    }
+
+	    public String getUserName() {
+	        return email;
+	    }
+
+	    public String getAddress() {
+	        return address;
+	    }
+
+	    public String getPhone() {
+	        return phone;
+	    }
+
+	    public Integer getNumOfReq() {
+	        return numOfReq;
+	    }
 
 	public boolean hasDiscount() {
 		boolean hasDiscount;

@@ -12,31 +12,28 @@ public class Product {
 	}
 	
 	public void setName(String newValue) {
-		name=newValue;
-		
+	    name = newValue;
 	}
+
 	public void setPrice(Integer valueOf) {
-		price=valueOf;
+	    price = valueOf;
 	}
 
 	public void setId(String newValue) {
-		id=newValue;
-		
+	    id = newValue;
 	}
-	
+
 	public String getName() {
-		return name;
-		
+	    return name;
 	}
-	public int getPrice() {
-		return price;
-		
+
+	public Integer getPrice() {
+	    return price;
 	}
+
 	public String getId() {
-		return id;
-		
+	    return id;
 	}
-	
 	
 	
 	

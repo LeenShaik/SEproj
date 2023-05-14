@@ -5,7 +5,7 @@ String id;
 String name;
 String phone;
 String address;
-boolean isFree;
+private boolean isFree;
 
 public Worker(String id , String name ,String phone ,String address ,boolean isFree) {
 	this.id=id;
@@ -16,9 +16,10 @@ public Worker(String id , String name ,String phone ,String address ,boolean isF
 	
 }
 public boolean getIsFree() {
-	return isFree;
+    return isFree;
 }
+
 public void setIsFree(boolean isFree) {
-	this.isFree=isFree;
+    this.isFree = isFree;
 }
 }

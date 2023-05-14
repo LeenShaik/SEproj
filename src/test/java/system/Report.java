@@ -7,67 +7,39 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class Report {
-	MySystem system;
-	Customer c;
-	Product p;
-	Worker w;
+	MySystem system=new MySystem();
 	boolean b;
-	public void report(MySystem system,Customer c,Product p,Worker w) {
-		this.system=system;
-	}
+	
 	
 
-	@Given("that these customers are registered in the system")
+	@Given("that this customers are registered in the system")
 	public void that_these_customers_are_registered_in_the_system(io.cucumber.datatable.DataTable dataTable) {
-		String id,name,email,phone,address;
-		int numOfReq;
-		for(int i=0; i<3;i++) {
-			id=dataTable.cell(i, 0);
-			name=dataTable.cell(i,1);
-			email=dataTable.cell(i,2);
-			numOfReq=Integer.parseInt(dataTable.cell(i, 3));
-			phone=dataTable.cell(i,4);
-			address=dataTable.cell(i,5);
-			c=new Customer(id,name,email,numOfReq,phone,address);
-			system.customers.add(c);   
-			}
-	    throw new io.cucumber.java.PendingException();
+		system.customers.add(new Customer("id1","faihaa odeh","s11923877@stu.najah.edu",5,"0599773638","DerAlhatab"));
+		system.customers.add(new Customer("id2","lana jaber","faihaa.odeh20@gmail.com",2,"0595721772","rafidia"));
+		system.customers.add(new Customer("987654","jana taher","s11819423@stu.najah.edu",1,"0593020265","makhfia"));
 	}
 
 	@Given("these products are valid in the system")
 	public void these_products_are_valid_in_the_system(io.cucumber.datatable.DataTable dataTable) {
-		String name,id ;
-		int price;
-		for(int i=0; i<6;i++) {
-			id=dataTable.cell(i, 0);
-			name=dataTable.cell(i,1);
-			price=Integer.parseInt(dataTable.cell(i,2));
-			p=new Product(id,name,price);
-			system.products.add(p);   
-			}
-	    throw new io.cucumber.java.PendingException();
+		system.products.add(new Product("0","CARPET minimum than 9",15));
+		system.products.add(new Product("1","CARPET greater than 9 and smaller than 16",20));
+		system.products.add(new Product("2","CARPET greater than 16",30));
+		system.products.add(new Product("3","SINGLECOVER",13));
+		system.products.add(new Product("4","COUPLECOVER",20));
+		system.products.add(new Product("5","CURTAIN",8));
 	}
 
-	@Given("that these worker are registered in the system")
-	public void that_these_worker_are_registered_in_the_system(io.cucumber.datatable.DataTable dataTable) {
-		String id,name,phone,address;
-		boolean isFree;
-		for(int i=0; i<4;i++) {
-			id=dataTable.cell(i, 0);
-			name=dataTable.cell(i,1);
-			phone=dataTable.cell(i,2);
-			address=dataTable.cell(i, 3);
-			isFree=Boolean.valueOf(dataTable.cell(i,4));
-			
-			w=new Worker(id,name,phone,address,isFree);
-			system.workers.add(w);   
-			}
-	    throw new io.cucumber.java.PendingException();
+	@Given("that this worker are registered in the system")
+	public void that_this_worker_are_registered_in_the_system(io.cucumber.datatable.DataTable dataTable) {
+
+		system.workers.add(new Worker("123","hamza ahmad","0598937949","Rafedia",true));
+		system.workers.add(new Worker("113","taher yaseen","0599894568","Rafedia",true));
+		system.workers.add(new Worker("223","ayman mohammed","059378568","makhfia",true));
 	}
 
 	@When("admin tries to show the report")
 	public void admin_tries_to_show_the_report() {
-	    b= system.report();
+	    b = system.report();
 	}
 
 	@Then("report will display")

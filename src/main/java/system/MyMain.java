@@ -111,8 +111,12 @@ public class MyMain {
 	    		        LOGGER.info("insert his address");
 	    		        address = con.nextLine();
 	    		        Customer c = new Customer(id, name, email, numOfReq, phone, address);
-	    		        String pr = system.register(c);
-	    		        LOGGER.info(pr);
+	    		        boolean pr = system.register(c);
+	    		        if(pr)
+	    		        LOGGER.info("Added successfully");
+	    		        else
+		    		        LOGGER.info("Customer already registered");
+
 	    		    } else if (s.equals("D")) {
 	    		        LOGGER.info("insert the id for customer to delete him");
 	    		        String id = con.nextLine();
@@ -125,8 +129,11 @@ public class MyMain {
 	    		        String id = con.nextLine();
 	    		        LOGGER.info("insert the new value");
 	    		        String newValue = con.nextLine();
-	    		        String pr = system.update(whatUpdate, id, newValue);
-	    		        LOGGER.info(pr);
+	    		        boolean check =system.update(whatUpdate, id, newValue);
+	    		        if(check)
+	    	    			LOGGER.info("Updated Successfully");
+	    	    			else
+	    	    				LOGGER.info("customer not valid");
 	    		    } else if (s.equals("B")) {
 	    		        list();
 	    		        break;
@@ -151,8 +158,7 @@ public class MyMain {
 	    			LOGGER.info("insert its price");
 	    			price=Integer.parseInt(con.nextLine());
 	    			Product p=new Product(id,name,price);
-	    			String pr =system.addProduct(p);
-	    			LOGGER.info(pr);
+	    			system.addProduct(p);
 	    		}
 	    		else if(s1.equals("D")) {
 	    			LOGGER.info("insert the id for product to delete it");
@@ -167,9 +173,11 @@ public class MyMain {
 	    			String id=con.nextLine();
 	    			LOGGER.info("insert the new value");
 	    			String newValue=con.nextLine();
-	    			String pr =system.updateProduct(newValue, id, whatUpdate);
-	    			LOGGER.info(pr);
-	    			
+	    			boolean check =system.updateProduct(newValue, id, whatUpdate);
+	    			if(check)
+	    			LOGGER.info("Updated Successfully");
+	    			else
+	    				LOGGER.info("product not valid");
 	    		}
 	    		else if (s1.equals("B")) {
 	    			list();

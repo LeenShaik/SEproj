@@ -10,7 +10,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
 public class MySystem {
     private static final Logger LOGGER = Logger.getLogger(MySystem.class.getName());
     static final String ADDRESS="Address";
@@ -18,7 +17,24 @@ public class MySystem {
 	 LinkedList<Product> products=new LinkedList<Product>();
 	 LinkedList<Worker> workers=new LinkedList<Worker>();
 	 LinkedList<Order> orders=new LinkedList<Order>();	
-	
+	public MySystem() {
+		workers.add(new Worker("123","hamza ahmad","0598937949","Rafedia",true));
+		workers.add(new Worker("113","taher yaseen","0599894568","Rafedia",true));
+		workers.add(new Worker("223","ayman mohammed","059378568","makhfia",true));
+		
+		customers.add(new Customer("123456","faihaa odeh","s11923877@stu.najah.edu",5,"0599773638","DerAlhatab"));
+		customers.add(new Customer("113456","lana jaber","faihaa.odeh20@gmail.com",2,"0595721772","rafidia"));
+		customers.add(new Customer("987654","jana taher","s11819423@stu.najah.edu",1,"0593020265","makhfia"));
+		
+		
+		products.add(new Product("0","CARPET minimum than 9",15));
+		products.add(new Product("1","CARPET greater than 9 and smaller than 16",20));
+		products.add(new Product("2","CARPET greater than 16",30));
+		products.add(new Product("3","SINGLECOVER",13));
+		products.add(new Product("4","COUPLECOVER",20));
+		products.add(new Product("5","CURTAIN",8));
+		
+	}
 	public boolean report() {
 		int i;
 		LOGGER.info("These customers are registered in the system");
@@ -69,17 +85,17 @@ public class MySystem {
 		int size=orders.size()+1;
 		return 5*size;
 	}
-	public String register(Customer c) {
+	public boolean register(Customer c) {
 			for(int i=0;i<customers.size();i++) {
 				if(c.id.equals(customers.get(i).id)) {
-					return "customer is alreay registered";
+					return false;
 				}
 			}
 			customers.add(c);
-			return "customer registered succefully";
+			return true;
 		
 	}
-	public String update(String w, String iD,String n) {
+	public boolean update(String w, String iD,String n) {
 		String whatUpdate =w;
 		String newValue =n;
 		String id=iD;
@@ -95,25 +111,22 @@ public class MySystem {
 						customers.get(i).setPhone(newValue);
 					else if(whatUpdate.equals("numOfReq"))
 						customers.get(i).setNumOfReq(Integer.parseInt(newValue));
-					return "customer updated successfully";
+					return true;
 				}
 			}
-			return "customer is not registered";
+			return false;
 		
 		
 	}
-	public String addProduct(Product p) {
+	public boolean addProduct(Product p) {
 			
 				for(int i=0;i<products.size();i++) {
 					if(p.id.equals(products.get(i).id)) {
-						return "product is already valid";
+						return false;
 					}
 				}
-				
 				products.add(p);
-				return "product added succefully";
-			
-		
+				return true;	
 	}
 	public String deleteCustomer(String iD) {
 		int index=-1;
@@ -150,8 +163,14 @@ public class MySystem {
 			return "product deleted successfully";}
 		
 	}
-	
-	public String updateProduct(String w, String iD, String n) {
+	public boolean pisupdated(String Id) {
+		for(int i =0;i<products.size();i++)
+			if(Id.equals(products.get(i).id))
+					return true;
+		return false;
+			
+	}
+	public boolean updateProduct(String w, String iD, String n) {
 		String id=iD;
 		String whatUpdate=w;
 		String newValue=n;
@@ -161,19 +180,21 @@ public class MySystem {
 				if(id.equals(products.get(i).id)) {
 					if(whatUpdate .equals("name")) {
 						products.get(i).setName(newValue);
-						flag=1;
+						
 					}
 					else if(whatUpdate.equals("price")) {
 						products.get(i).setPrice(Integer.valueOf(newValue));
-						flag=1;
+						
 					}
+					flag=1;
 					
 				}
+				
 			}
 			if(flag==1)
-				return "product updated successfully";
+				return true;
 			else 
-				return "product is not valid";
+				return false;
 		
 	}
 	
@@ -193,6 +214,25 @@ public class MySystem {
 		}
 		return flag;
 	}
+public String search(String id) {
+			for(int i=0;i<customers.size();i++) {
+				if(id.equals(customers.get(i).id)) {
+				return "coustomer information => id:"+customers.get(i).id + ", name:"+customers.get(i).name+", email:"+customers.get(i).email+" , number of requests:"+customers.get(i).numOfReq+" , phone number:"+customers.get(i).phone+" , address:"+customers.get(i).address;
+				}
+			}
+			return "customer is not registered";
+		
+		}
+		public String searchProduct(String id) {
+			String iD=id;
+				for(int i=0;i<products.size();i++) {
+					if(iD.equals(products.get(i).id)) {
+						return "product information => id:"+products.get(i).id+" , name:"+products.get(i).name+" , price:"+products.get(i).price;
+					}
+					}
+				
+				return "product is not valid";
+			}
 	
 	public String distribute( Order o) {
 		int index=-1;
@@ -234,8 +274,7 @@ public class MySystem {
         Transport.send(message);
         
 	}
-	public String sendEmail(String email) {
-		  String s="Sent message successfully...";
+	public boolean sendEmail(String email) {
 	      String from = "leen.aljaber123@gmail.com";
 		  String to = email;
 	      String host = "localhost";
@@ -257,7 +296,7 @@ public class MySystem {
 	      } catch (MessagingException mex) {
 	         mex.printStackTrace();
 	      }
-		 return s;
+		 return true;
 	   }
 	public int diliveryPriceCalc(Customer c ) {
 		String s=c.address;
