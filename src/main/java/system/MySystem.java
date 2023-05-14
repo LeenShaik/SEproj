@@ -163,9 +163,9 @@ public class MySystem {
 			return "product deleted successfully";}
 		
 	}
-	public boolean pisupdated(String Id) {
+	public boolean pisupdated(String id) {
 		for(int i =0;i<products.size();i++)
-			if(Id.equals(products.get(i).id))
+			if(id.equals(products.get(i).id))
 					return true;
 		return false;
 			
@@ -174,7 +174,7 @@ public class MySystem {
 		String id=iD;
 		String whatUpdate=w;
 		String newValue=n;
-		int flag=0;
+		boolean flag=false;
 		
 			for(int i=0;i<products.size();i++) {
 				if(id.equals(products.get(i).id)) {
@@ -186,15 +186,12 @@ public class MySystem {
 						products.get(i).setPrice(Integer.valueOf(newValue));
 						
 					}
-					flag=1;
+					flag=true;
 					
 				}
 				
 			}
-			if(flag==1)
-				return true;
-			else 
-				return false;
+			return flag;
 		
 	}
 	

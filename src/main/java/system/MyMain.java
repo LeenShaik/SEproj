@@ -112,10 +112,10 @@ public class MyMain {
 	    		        address = con.nextLine();
 	    		        Customer c = new Customer(id, name, email, numOfReq, phone, address);
 	    		        boolean pr = system.register(c);
-	    		        if(pr)
-	    		        LOGGER.info("Added successfully");
-	    		        else
-		    		        LOGGER.info("Customer already registered");
+	    		        if(pr) {
+	    		        LOGGER.info("Added successfully");}
+	    		        else {
+		    		        LOGGER.info("Customer already registered");}
 
 	    		    } else if (s.equals("D")) {
 	    		        LOGGER.info("insert the id for customer to delete him");
@@ -130,10 +130,10 @@ public class MyMain {
 	    		        LOGGER.info("insert the new value");
 	    		        String newValue = con.nextLine();
 	    		        boolean check =system.update(whatUpdate, id, newValue);
-	    		        if(check)
-	    	    			LOGGER.info("Updated Successfully");
-	    	    			else
-	    	    				LOGGER.info("customer not valid");
+	    		        if(check) {
+	    	    			LOGGER.info("Updated Successfully");}
+	    	    			else {
+	    	    				LOGGER.info("customer not valid");}
 	    		    } else if (s.equals("B")) {
 	    		        list();
 	    		        break;
@@ -174,10 +174,10 @@ public class MyMain {
 	    			LOGGER.info("insert the new value");
 	    			String newValue=con.nextLine();
 	    			boolean check =system.updateProduct(newValue, id, whatUpdate);
-	    			if(check)
-	    			LOGGER.info("Updated Successfully");
-	    			else
-	    				LOGGER.info("product not valid");
+	    			if(check) {
+	    			LOGGER.info("Updated Successfully");}
+	    			else {
+	    				LOGGER.info("product not valid");}
 	    		}
 	    		else if (s1.equals("B")) {
 	    			list();
@@ -210,7 +210,7 @@ public class MyMain {
 	    		numOfOrder=Integer.valueOf(con.nextLine());
 	    		int wflag=0;
 	    		for(int k=0;k<system.workers.size();k++) {
-	    			if(system.workers.get(k).isFree) {
+	    			if(system.workers.get(k).getIsFree()) {
 	    				wId=system.workers.get(k).id;
 	    				system.workers.get(k).setIsFree(false);
 	    				wflag=k;
